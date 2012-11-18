@@ -8,16 +8,22 @@
 */
 ini_set('display_errors', 1);
 
-echo "Included php-liblouis-helerfunctions.php";
-
-echo_error_no_direct_access();
 
 
 //Error Messages
-function echo_error_no_direct_access()
+function error_no_direct_access()
 {
-	echo "No direct access";
+	echo "No direct access available.";
 }
 
+function error_no_cli_access()
+{
+	echo "Error accessing the CLI interface.";
+}
+
+function custom_error($errorMessage)
+{
+	echo $errorMessage;
+}
 
 ?>

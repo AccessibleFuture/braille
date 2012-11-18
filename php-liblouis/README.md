@@ -30,11 +30,23 @@ PHP **must** be able to make a system call using the `system()` and `exec()` fun
 
 Due to the use of the exec() function in PHP, `PHP-LibLouis` will run only on PHP v4.0 and higher.
 
+##Interacting with the Library
+
+###Including PHP-LibLouis in your project 
+You will first need to download the PHP-LibLouis framework, and then place the 'PHP-Liblouis' folder inside of your PHP project. Then, in order to use the functionality, you will need to include the `php-liblouis.php` file in your PHP project. 
+
+	//include once 
+	include_once 'php-liblouis.php';   
+	
+or 
+
+	//require
+	require_once 'php-liblouis.php';
 
 ##Library Functions
 There are numerous library functions that aid in the ability to translate a plain text string into various braille outputs.
 
-###`function returnBrailleForString($textToTranslate, $libLouisOptions)`
+###`function returnBrailleForString($textToTranslate, $libLouisOptions, $success)`
 When called, this function will return a Braille ASCII encoded string that can be used by your program at will. The `$textToTranslate` variable should be a plain-text string that you wish to translate into a braille-ready file. 
 
 **Usage**
@@ -52,7 +64,9 @@ When called, this function will return a Braille ASCII encoded string that can b
 	//do something with the translated text
 	echo $textToBeTranslated . ' is ' . $translatedText . " in Braille ASCII.";
 
-###`function returnBRFFileForString($textToTranslate, $libLouisOptions)`
+###`function returnBRFFileForString($textToTranslate, $libLouisOptions, $success)`
+
+
 
 **Usage**
 
@@ -62,16 +76,13 @@ When called, this function will return a Braille ASCII encoded string that can b
 	$textToBeTranslated = "Hello, world!"
 	
 
-##Interacting with the Library
-
-###Including PHP-LibLouis in your project 
-You will first need to download the PHP-LibLouis 
+### Options 
 
 
 ##Changelog
 **Version 0.1**
 
-- Initial version of the library available for alpha testing
+- Initial version of the library available for beta testing
 
 ##License
 PHP-LibLouis is released under the [MIT Open Source License](http://opensource.org/licenses/MIT).

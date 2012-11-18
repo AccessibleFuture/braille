@@ -2,8 +2,6 @@ PHP-LibLouis v.0.1
 ===
 PHP-LibLouis is a PHP Library that lets you interact with LibLouisXML directly from PHP code.
 
-**ALPHA**
-
 ##About the Library 
 The `PHP-LibLouis` is a PHP library with the goal of the library, making interacting with the command line tool `xml2brl (LibLouisXML)` an easy experience in PHP. This library allows complete braille translations from `PHP-LibLouis` library calls. The library allows interaction with the `xml2brl` program from within PHP without any knowledge of system calls.
 
@@ -22,6 +20,10 @@ Installing `xml2brl` onto Linux-based systems with [apt-get](https://help.ubuntu
 Installing `xml2brl` onto a Mac-based system with [MacPorts](http://macports.org)
 
 	sudo port install liblouisxml
+	
+Installing `xml2brl` onto a Mac-based system with [Homebrew](http://mxcl.github.com/homebrew/)
+
+	Package not yet available in Homebrew.
 
 ###PHP Requirements
 PHP **must** be able to make a system call using the `system()` and `exec()` functionality. `PHP-LibLouis` relies on this link to be able to call the `xml2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this 
@@ -42,14 +44,23 @@ When called, this function will return a Braille ASCII encoded string that can b
 	//vars
 	$textToBeTranslated = "Hello, world!".
 	$translatedText = "";
+	$options = "any options here";
 	
 	//calling the PHP-LibLouis Framework
+	$translatedText = returnBrailleForString($textToBeTranslated, $options);
 	
+	//do something with the translated text
+	echo $textToBeTranslated . ' is ' . $translatedText . " in Braille ASCII.";
 
 ###`function returnBRFFileForString($textToTranslate, $libLouisOptions)`
 
 **Usage**
 
+	include('/path/to/PHP-LibLouis.php');
+	
+	//vars 
+	$textToBeTranslated = "Hello, world!"
+	
 
 ##Interacting with the Library
 

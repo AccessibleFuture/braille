@@ -1,4 +1,4 @@
-PHP-LibLouis v.0.1
+PHP-LibLouis v.0.9
 ===
 PHP-LibLouis is a PHP Library that lets you interact with LibLouisXML directly from PHP code.
 
@@ -80,7 +80,7 @@ When called, this function will return a Braille ASCII encoded string that can b
 
 
 ##Changelog
-**Version 0.1**
+**Version 0.9**
 
 - Initial version of the library available for beta testing
 

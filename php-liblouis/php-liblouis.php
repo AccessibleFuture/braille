@@ -10,6 +10,4 @@ ini_set('display_errors', 1);
 
 include_once 'lib/php-liblouis-public_access.php';
 
-error_no_direct_access();
-
 ?>

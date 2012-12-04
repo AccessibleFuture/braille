@@ -15,14 +15,14 @@ include_once 'php-liblouis-helperfunctions.php';
 include_once 'php-liblouis-system.php'; 
 include_once 'php-liblouis-constants.php';
 
-function returnBRFFileForString($textToTranslate, $libLouisOptions, $success)
+function returnBRFFileForString($textToTranslate, $libLouisOptions)
 {
-
+	return "return .brf unavailable at this time";
 }
 
-function returnBrailleForString($textToTranslate, $libLouisOptions, $success)
+function returnBrailleForString($textToTranslate, $libLouisOptions)
 {
-
+	return _performSystemCall(kCallTypeASCIIText, $textToTranslate, $libLouisOptions);
 }
 
 

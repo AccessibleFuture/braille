@@ -21,6 +21,7 @@ define("kCallTypeFile", "file");
 //Errors
 define("kErrorTranslating_NoText"					, "[PHP-LibLouis] E102: Error translating. No text provided");
 define("kErrorTranslating_NotConfigured"			, "[PHP-LibLouis] E103: Error translating. LibLouis not installed and/or configured.");
+define("kErrorHandlingFile"							, "[PHP-LibLouis] E104: There was an error handling the PHP tempfile.")
 
 
 ?>

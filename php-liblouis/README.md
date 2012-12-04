@@ -26,9 +26,9 @@ Installing `xml2brl` onto a Mac-based system with [Homebrew](http://mxcl.github.
 	Package not yet available in Homebrew.
 
 ###PHP Requirements
-PHP **must** be able to make a system call using the `system()` and `exec()` functionality. `PHP-LibLouis` relies on this link to be able to call the `xml2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this 
+PHP **must** be able to make a system call using the `system()`, `passthru`, and `exec()` functions. `PHP-LibLouis` relies on this link to be able to call the `xml2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this functionality will result in the inability to use `PHP-LibLouis` with your setup. Furthermore, 
 
-Due to the use of the exec() function in PHP, `PHP-LibLouis` will run only on PHP v4.0 and higher.
+`PHP-LibLouis` will run only on PHP v5.0 and higher, and the use of tempfiles must be allowed.
 
 ##Interacting with the Library
 
@@ -42,29 +42,34 @@ or
 
 	//require
 	require_once 'php-liblouis.php';
+	
+**It is important that you DO NOT call any of the `PHP-LibLouis` functions or use any of the variables containing an underscore (_). These functions are for use by the `PHP-LibLouis` system for system functionality only.**
 
 ##Library Functions
 There are numerous library functions that aid in the ability to translate a plain text string into various braille outputs.
 
-###`function returnBrailleForString($textToTranslate, $libLouisOptions, $success)`
-When called, this function will return a Braille ASCII encoded string that can be used by your program at will. The `$textToTranslate` variable should be a plain-text string that you wish to translate into a braille-ready file. 
+###`function returnBrailleForString($textToTranslate, $libLouisOptions)`
+When called, this function will return a Braille ASCII encoded string that can be used by your program at will. The `$textToTranslate` variable should be a plain-text string that you wish to translate into a braille-ready file. If the translation fails, then the function `returnBrailleForString` will return a `BOOL` of `FALSE`. Anything else should be considered a successfully translated string of text.
 
 **Usage**
 	
 	include('/path/to/PHP-LibLouis.php');
 	
 	//vars
-	$textToBeTranslated = "Hello, world!".
-	$translatedText = "";
-	$options = "any options here";
+	$textToBeTranslated = "Hello, World!";
 	
-	//calling the PHP-LibLouis Framework
-	$translatedText = returnBrailleForString($textToBeTranslated, $options);
+	$translatedText = returnBrailleForString($textToBeTranslated, "");
 	
-	//do something with the translated text
-	echo $textToBeTranslated . ' is ' . $translatedText . " in Braille ASCII.";
+	if($translatedText == FALSE)
+	{
+		//translation failed
+	}
+	else
+	{
+		//do something with translated text
+	}
 
-###`function returnBRFFileForString($textToTranslate, $libLouisOptions, $success)`
+###`function returnBRFFileForString($textToTranslate, $libLouisOptions)`
 
 
 
@@ -73,7 +78,6 @@ When called, this function will return a Braille ASCII encoded string that can b
 	include('/path/to/PHP-LibLouis.php');
 	
 	//vars 
-	$textToBeTranslated = "Hello, world!"
 	
 
 ### Options 

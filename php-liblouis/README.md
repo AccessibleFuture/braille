@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 PHP-LibLouis v.0.9
 ===
 PHP-LibLouis is a PHP Library that lets you interact with LibLouisXML directly from PHP code.
@@ -152,3 +153,13 @@ For version 0.9 of the PHP-LibLouis framework, options are not yet included; how
 
 ##License
 PHP-LibLouis is released under the [MIT Open Source License](http://opensource.org/licenses/MIT).
+=======
+# Testing with PHPUnit
+
+PHPUnit can be installed following the directions at 
+[http://www.phpunit.de/manual/current/en/installation.html](http://www.phpunit.de/manual/current/en/installation.html).
+
+To run the tests:
+
+% phpunit test/*
+>>>>>>> 46d6d03eaa9f260bd508693078f2ec34a3b81c04

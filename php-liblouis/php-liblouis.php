@@ -3,6 +3,8 @@
 /*
 	PHP-LibLouis is an open source project developed by the University of Maryland Institute for Technology in the Humanities. 
 
+	PHP-LibLouis was written by Cory Bohon (@coryb).
+
 	View README.md for information on how to use this library. 
 
 */

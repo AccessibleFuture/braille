@@ -3,6 +3,8 @@
 /*
 	PHP-LibLouis Helper Functions 
 	
+	PHP-LibLouis was written by Cory Bohon (@coryb).
+	
 	Handles accessory functions for PHP-LibLouis
 	
 */

@@ -4,6 +4,8 @@
 
 	PHP-LibLouis Constants
 	
+	PHP-LibLouis was written by Cory Bohon (@coryb).
+	
 	Constants for use throughout PHP-LibLouis
 
 */

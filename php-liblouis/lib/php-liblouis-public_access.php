@@ -4,6 +4,8 @@
 
 	PHP-LibLouis Public Access
 	
+	PHP-LibLouis was written by Cory Bohon (@coryb).
+	
 	Handles the publically accessible functionality for PHP-LibLouis. 
 	
 */
@@ -17,7 +19,7 @@ include_once 'php-liblouis-constants.php';
 
 function returnBRFFileForString($textToTranslate, $libLouisOptions)
 {
-	return "return .brf unavailable at this time";
+	return _performSystemCall(kCallTypeFile, $textToTranslate, $libLouisOptions);
 }
 
 function returnBrailleForString($textToTranslate, $libLouisOptions)

@@ -4,6 +4,8 @@
 
 	PHP-LibLouis System 
 	
+	PHP-LibLouis was written by Cory Bohon (@coryb).
+	
 	Handles the system calls for PHP-LibLouis
 
 */

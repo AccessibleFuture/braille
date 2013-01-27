@@ -1,6 +1,6 @@
 Remote-LibLouis v.0.9
 ===
-Remote-LibLouis is a Sinatra HTTP service that lets you interact with LibLouisXML directly with POST requests.
+Remote-LibLouis is a Sinatra HTTP service that lets you interact with LibLouisXML remotely with POST requests.
 
 ##About the Library 
 

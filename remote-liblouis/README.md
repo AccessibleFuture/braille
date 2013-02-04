@@ -4,16 +4,27 @@ Remote-LibLouis is a Sinatra HTTP service that lets you interact with LibLouisXM
 
 ##About the Library 
 
-##What you need to use Remote-LibLouis
-In order to use the `Remote-LibLouis` service, you must first meet some requirements: 
-
 ###System Requirements
+System with Ruby and Ruby Gems Installed. 
 
-####Installing on Linux Systems
-	
-####Installing on Mac Systems
+####Installing Remote-LibLouis
 
-##Interacting with the Library
+    bundle install
+
+####Running Remote-LibLouis 
+
+    cd location_of_remote-liblouis directory
+
+    unicorn -p 1234
+
+Replace "1234" with the port number that you wish to use for the REST service.
+
+##API
+
+    POST .../text/
+
+
+
 
 ##Changelog
 **Version 0.9**

@@ -1,6 +1,6 @@
 Remote-LibLouis v.0.9
 ===
-Remote-LibLouis is a Ruby + Sinatra HTTP service that lets you interact with LibLouisXML remotely with POST requests.
+Remote-LibLouis is a Ruby + Sinatra HTTP service that lets you interact with LibLouisXML remotely as a REST service.
 
 ##About the Library 
 
@@ -19,7 +19,7 @@ Your system must have LibLouis installed. If your system supports apt-get, then 
 
 ####Running Remote-LibLouis 
 
-    cd location_of_remote-liblouis directory
+    cd location_of_remote-liblouis_directory
 
     unicorn -p 1234
 

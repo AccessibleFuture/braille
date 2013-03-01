@@ -45,7 +45,7 @@ post '/braille' do
 			
 				##Exit with status code 502
 				status 502
-				"Content not successfuly converted to braille." 
+				"Content not successfully converted to braille." 
 				
 			end
 	
@@ -76,4 +76,71 @@ post '/braille' do
 			
 	end
 
+end
+
+post '/braille.json' do
+
+##Create the input and output files for the system call
+	input_file = Tempfile.new('braille')
+	output_file = Tempfile.new('braille')
+	
+	request.body.rewind  # in case someone already read it
+ 	 data = JSON.parse request.body.read
+	
+	##Write the message that the caller provided in the message param to the input_file var
+	input_file.write("#{data['content']}")
+	
+	##If the input file has content, then proceed with the translation
+	## otherwise, exit with the status code 501 "You must specify content to convert to braille."
+	if input_file.size > 0
+	
+		begin
+			
+			##Make the system call
+			system("xml2brl -p #{input_file.path} #{output_file.path}")
+			
+			##Check to make sure that the length of the output file is great than 0; if not, then 
+			## exit with a status 502 "Content not successfully converted to braille."
+			
+			if output_file.size > 0	
+			
+				## Return the output file contents
+				outputInJSON = {'content' => "#{output_file.read}"}
+				outputInJSON.to_json
+			
+			else 
+			
+				## Exit with status code 502
+				status 502
+				"Content not successfully converted to braille.".to_json
+				
+			end
+			
+		ensure
+		
+			##Close the files
+			input_file.close
+			output_file.close
+			
+			##Unlink the files
+			input_file.unlink
+			output_file.unlink
+			
+		end
+	
+	else
+	
+		##Close the files
+		input_file.close
+		output_file.close
+			
+		##Unlink the files
+		input_file.unlink
+		output_file.unlink
+		
+		status 501
+		"You must specify content to conver to braille.".to_json
+	
+	end
+		
 end

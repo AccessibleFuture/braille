@@ -1,4 +1,4 @@
-Remote-LibLouis v.0.9
+Remote-LibLouis v.1.0
 ===
 Remote-LibLouis is a Ruby + Sinatra HTTP service that lets you interact with LibLouisXML remotely as a REST service.
 
@@ -16,6 +16,13 @@ Your system must have LibLouis installed. If your system supports apt-get, then 
 ####Installing Remote-LibLouis
 
     bundle install
+    
+####Required Gems
+
+	1. sinatra
+	2. json
+	3. tempfile
+	4. unicorn
 
 ####Running Remote-LibLouis 
 
@@ -27,11 +34,45 @@ Replace "1234" with the port number that you wish to use for the REST service.
 
 ##API
 
+###JSON-Encoded Data
+	POST ../braille.json
+	
+When posting to the /braille.json endpoint, use POST, and include the text that you wish to convert as the value of the key named "content." 
+
+####Form-Encoded Example
+HTTP Body: 
+
+	{
+	  "content": "Hello, world!"
+	}
+	
+Response Body: 
+
+	{
+    	"content": "  ,hello1 _w6\r\n"
+	}
+
+The response body of the request that is returned will include the braille ascii text for the plain text sent to the service in the "content" key value.
+
+###Form-Encoded Data
+
     POST .../braille
 
-When posting to the /braille endpoint, use POST, and include the text that you wish to convert as the value of a key named "content." Currently, Remote-LibLouis v.0.9 supports only form-encoded data, but a future update will allow it to support JSON-encoded data. 
+When posting to the /braille endpoint, use POST, and include the text that you wish to convert as the value of a key named "content."
 
-The response body of the request that is returned will include the braille ascii text for the plain text sent to the service in the "content" value. 
+####Form Encoded Example
+HTTP Body: 
+
+	content=Hello%2C+world%21
+	
+Response Body: 
+
+	,hello1 _w6
+
+The response body of the request that is returned will include the braille ascii text for the plain text sent to the service.
+
+
+
 
 ##API Status Codes
 <table>
@@ -82,6 +123,10 @@ The response body of the request that is returned will include the braille ascii
 </table>
 
 ##Changelog
+**Version 1.0**
+
+- Inclusion of a JSON endpoint for the service; additional tweaks to the documentation and code documentation.
+
 **Version 0.9**
 
 - Initial version of the service available for beta testing

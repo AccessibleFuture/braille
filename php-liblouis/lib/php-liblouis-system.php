@@ -46,12 +46,12 @@ function _performSystemCall($callType, $text, $options = kNoOptions)
 	if($options != kNoOptions)
 	{
 		//no options, then create the command
-		$command = escapeshellcmd("xml2brl -p" . " " . $_standardText . " " .  $_translatedText);
+		$command = escapeshellcmd("file2brl -p" . " " . $_standardText . " " .  $_translatedText);
 	}
 	else
 	{
 		//right now, we don't handle options, so we'll just create the command sans options
-		$command = escapeshellcmd("xml2brl -p" . " " . $_standardText . " " .  $_translatedText);
+		$command = escapeshellcmd("file2brl -p" . " " . $_standardText . " " .  $_translatedText);
 	}
 	
 	//execute the command

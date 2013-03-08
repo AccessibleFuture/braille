@@ -8,9 +8,9 @@ Remote-LibLouis is a Ruby + Sinatra HTTP service that lets you interact with Lib
 System with Ruby and Ruby Gems Installed. 
 
 ####Installing LibLouis
-Your system must have LibLouis installed. If your system supports apt-get, then run the following command in the CLI interface to install LibLouis:
+Your system must have LibLouis installed (specifically the version that contains `file2brl`). If your system supports apt-get, then run the following command in the CLI interface to install LibLouis:
 
-	sudo apt-get install liblouisxml-bin
+	sudo apt-get install liblouisutdml-bin
 	
 
 ####Installing Remote-LibLouis
@@ -92,7 +92,7 @@ The response body of the request that is returned will include the braille ascii
 	404
 </td>
 <td>
-	The only active endpoint is /braille. It only accepts POST. You will get this error code if you try to GET or POST to any other endpoint.
+	The only active endpoint is /braille and /braile.json. It only accepts POST. You will get this error code if you try to GET or POST to any other endpoint.
 </td>
 <td>
 	"Not found; only POST is allowed. See documentation here: https://github.com/corybohon/braille/tree/master/remote-liblouis"

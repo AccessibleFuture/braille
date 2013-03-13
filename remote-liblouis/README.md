@@ -39,11 +39,11 @@ Replace "1234" with the port number that you wish to use for the REST service.
 	
 When posting to the /braille.json endpoint, use POST, and include the text that you wish to convert as the value of the key named "content." 
 
-####Form-Encoded Example
+####JSON-Encoded Example
 HTTP Body: 
 
 	{
-	  "content": "Hello, world!"
+		"content": "Hello, world!"
 	}
 	
 Response Body: 
@@ -87,6 +87,18 @@ The response body of the request that is returned will include the braille ascii
 	Returned Text
 </td>
 </tr>
+<tr>
+<td>
+	200
+</td>
+<td>
+	Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response.
+</td>
+<td>
+	JSON or Form-Encoded response with braille ASCII based on sent plain text.
+</td>
+</tr>
+
 <tr>
 <td>
 	404

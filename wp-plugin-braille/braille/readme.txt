@@ -1,13 +1,15 @@
-=== Reprint ===
-Contributors: literaturegeek
+=== braille ===
+Contributors: literaturegeek, jgsmith
 Requires at least: 3.0.1
 Tested up to: 3.4.2
 
-A plugin for BrailleSC/Making DH More Open. Takes the text marked by the "braille" shortcode and applies a styling function.
+A plugin for BrailleSC/Making DH More Open. 
 
 == Description ==
 
-A plugin that takes the text marked by the "braille" shortcode and applies a styling function.
+This plugin provides a "braille" shortcode to translate the enclosed text into Braille. Some sections of a website may be marked to be translated into Braille automatically without requiring the shortcode.
+
+The plugin also provides a Braille output type for the Anthologize plugin.
 
 == Installation ==
 
@@ -18,7 +20,7 @@ A plugin that takes the text marked by the "braille" shortcode and applies a sty
 
 = Does this plugin convert post text to Braille? =
 
-Not yet.
+Yes if the plugin is configured to do so through the plugin settings page.
 
 == Changelog ==
 

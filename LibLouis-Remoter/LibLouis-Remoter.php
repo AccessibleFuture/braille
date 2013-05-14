@@ -44,18 +44,10 @@ function returnBrailleForString($textToTranslate, $url)
  	return $response['content'];
 }
 
-function returnBRFFileForString($textToTranslate, $server, $port)
+function returnBRFFileForString($textToTranslate, $url)
 {
 	//convert the passed content into an array, and then JSON encode it 
 	$content = json_encode(array("content" => $textToTranslate));
-	
-	//check to see if there's a port number, if so, add it to the server
-	if($port != ""){
-		$server = $server . ":" . $port;
-	}
-	
-	//add the braille.json endpoint to the 
-	$url = $server . "/braille.json";
 
 	//cURL implementation to handle posting the content and getting a response back
  	$curl = curl_init($url);

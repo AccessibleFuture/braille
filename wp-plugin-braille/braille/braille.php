@@ -1,10 +1,10 @@
 <?php
 $use_remote = get_option("braille_use_remote");
 if($use_remote) {
-  require_once 'LibLouis-Remoter.php';
+  require_once 'lib/LibLouis-Remoter.php';
 }
 else {
-  require_once 'LibLouis.php';
+  require_once 'lib/LibLouis.php';
 }
 
 /*
@@ -64,7 +64,7 @@ if ( is_plugin_active( 'anthologize/anthologize.php' ) ) {
   $htmlFontSizes = array('48pt'=>'48 pt', '36pt'=>'36 pt', '18pt'=>'18 pt', '14'=>'14 pt', '12'=>'12 pt');
   anthologize_register_format_option("BRL", 'font-size', __( 'Font Size', 'anthologize' ), 'dropdown', $htmlFontSizes, '14pt');
   anthologize_register_format_option( 'BRL', 'download', __('Download Braille?', 'braille'), 'checkbox', array('Download'=>'download'), 'download');
-  anthologize_register_format_option( 'BRL', 'utf8', __('Convert BRL to UTF-8?', 'braille'), 'checkbox', array('UTF8' => 'utf8'), 'utf8');
+  anthologize_register_format_option( 'BRL', 'utf8', __('Convert BRL to SimBraille?', 'braille'), 'checkbox', array('UTF8' => 'utf8'), 'utf8');
 }
 
 function braille_admin_menu() {
@@ -163,7 +163,7 @@ function braille_settings_page() {
         <input type="checkbox" name="braille_display_utf8"<?php
            echo $display_utf8 ? " checked" : "";
         ?>>
-        <?php echo _e( "Translate BRL to UTF-8 for display" ); ?>
+        <?php echo _e( "Translate BRL to SimBraille for display" ); ?>
       </p>
       <p>
         <?php echo _e( "Path to local xml2brl program") ?>

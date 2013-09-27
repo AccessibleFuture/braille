@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
 
@@ -107,9 +107,8 @@ function _isAvailable($func)
 
 function _getUniqueFileName()
 {
-	srand();
 	$_UIDFileName = date("m.d.y.H:i:s"); 
-	$_UIDFileName .= rand();
+	$_UIDFileName .= "-" . getmypid();
 }
 
 

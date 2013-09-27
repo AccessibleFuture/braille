@@ -17,9 +17,7 @@ Installing `file2brl` onto Linux-based systems with [apt-get](https://help.ubunt
 	sudo apt-get install liblouisutdml-bin
 
 ###PHP Requirements
-PHP **must** be able to make a system call using the `system()`, `passthru`, and `exec()` functions. `PHP-LibLouis` relies on this link to be able to call the `file2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this functionality will result in the inability to use `PHP-LibLouis` with your setup. Furthermore, 
-
-`PHP-LibLouis` will run only on PHP v5.0 and higher, and the use of tempfiles must be allowed.
+PHP **must** be able to make a system call using the `system()`, `passthru`, and `exec()` functions. `PHP-LibLouis` relies on this link to be able to call the `file2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this functionality will result in the inability to use `PHP-LibLouis` with your setup. Furthermore, `PHP-LibLouis` will run only on PHP v5.0 and higher, and the use of tempfiles must be allowed.
 
 ##Interacting with the Library
 

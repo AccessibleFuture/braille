@@ -29,13 +29,13 @@ When called, this function will return a Braille ASCII string based on the strin
 	include_once 'LibLouis-Remoter.php';
 	
 	$textToTranslate = "Hello, World!";
-	$server =  "http://50.17.123.123/";
+	$url =  "http://50.17.123.123/";
 	
-	echo returnBrailleForString($textToTranslate, $server, $port);
+	echo returnBrailleForString($textToTranslate, $url);
 	
 	?>
 
-### returnBRFFileForString($textToTranslate, $server, $port)
+### returnBRFFileForString($textToTranslate, $url)
 When called, this function will return a file whose contents contain the Braille ASCII text based on the string that you passed into $textToTranslate, using the Remote-LibLouis service located at the $server (with option $port number). Note that if the server doesn't use a port number for Remote-LibLouis, use an empty string (""); also, don't include endpoints -- the braille.json endpoint will automatically be added when making the call to the server.
 
 Remember that the tempfile that is returned will not be unlinked by LibLouis-Remoter. It is up to you to call `unlink($file)` to remove the temp file.
@@ -46,9 +46,9 @@ Remember that the tempfile that is returned will not be unlinked by LibLouis-Rem
 	include_once 'LibLouis-Remoter.php';
 	
 	$textToTranslate = "Hello, World!";
-	$server =  "http://50.17.123.123/";
+	$url =  "http://50.17.123.123/";
 	
-	$translatedText = returnBRFFileForString($textToTranslate, $server, $port);
+	$translatedText = returnBRFFileForString($textToTranslate, $url);
 	
 	//do something with $translatedText
 	

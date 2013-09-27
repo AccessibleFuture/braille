@@ -1,30 +1,31 @@
-Remote-LibLouis v.1.0
-===
+# Remote-LibLouis v.1.0
+
 Remote-LibLouis is a Ruby + Sinatra HTTP service that lets you interact with LibLouisXML remotely as a REST service.
 
-##About the Library 
+## About the Library 
 
-###System Requirements
+### System Requirements
+
 System with Ruby and Ruby Gems Installed. 
 
-####Installing LibLouis
-Your system must have LibLouis installed (specifically the version that contains `file2brl`). If your system supports apt-get, then run the following command in the CLI interface to install LibLouis:
+#### Installing LibLouis
 
-	sudo apt-get install liblouisutdml-bin
-	
+Your system must have LibLouis installed (specifically the version that contains `file2brl`). On Ubuntu run the following from the command line to install LibLouis:
 
-####Installing Remote-LibLouis
+    sudo apt-get install liblouisutdml-bin
+
+#### Installing Remote-LibLouis
 
     bundle install
     
-####Required Gems
+#### Required Gems
 
-	1. sinatra
-	2. json
-	3. tempfile
-	4. unicorn
+1. sinatra
+2. json
+3. tempfile
+4. unicorn
 
-####Running Remote-LibLouis 
+#### Running Remote-LibLouis 
 
     cd location_of_remote-liblouis_directory
 
@@ -32,109 +33,113 @@ Your system must have LibLouis installed (specifically the version that contains
 
 Replace "1234" with the port number that you wish to use for the REST service.
 
-##API
+#### Configuring the WordPress Braille Plugin
 
-###JSON-Encoded Data
-	POST ../braille.json
-	
-When posting to the /braille.json endpoint, use POST, and include the text that you wish to convert as the value of the key named "content." 
+When using this service as the remote LibLouis service for the Braille WordPress plugin, use the `braille.json` endpoint.
 
-####JSON-Encoded Example
+## API
+
+### JSON-Encoded Data
+
+    POST http://localhost:1234/braille.json
+  
+When posting to the `braille.json` endpoint, use POST, and include the text that you wish to convert as the value of the key named "content". 
+
+#### JSON-Encoded Example
+
 HTTP Body: 
 
-	{
-		"content": "Hello, world!"
-	}
-	
+    {
+        "content": "Hello, world!"
+    }
+  
 Response Body: 
 
-	{
-    	"content": "  ,hello1 _w6\r\n"
-	}
+    {
+        "content": "  ,hello1 _w6\r\n"
+    }
 
 The response body of the request that is returned will include the braille ascii text for the plain text sent to the service in the "content" key value.
 
-###Form-Encoded Data
+### Form-Encoded Data
 
-    POST .../braille
+    POST http://localhost:1234/braille
 
-When posting to the /braille endpoint, use POST, and include the text that you wish to convert as the value of a key named "content."
+When posting to the `braille` endpoint (without the `.json` extension), use POST, and include the text that you wish to convert as the value of a key named "content".
 
-####Form Encoded Example
+#### Form Encoded Example
 HTTP Body: 
 
-	content=Hello%2C+world%21
-	
+    content=Hello%2C+world%21
+  
 Response Body: 
 
-	,hello1 _w6
+    ,hello1 _w6
 
-The response body of the request that is returned will include the braille ascii text for the plain text sent to the service.
+The response body of the request that is returned will include the braille ascii text suitable for embossing for the plain text sent to the service.
 
-
-
-
-##API Status Codes
+## API Status Codes
 <table>
 <tr>
 <td>
-	Code
+  Code
 </td>
 <td>
-	Meaning
+  Meaning
 </td>
 <td>
-	Returned Text
+  Returned Text
 </td>
 </tr>
 <tr>
 <td>
-	200
+  200
 </td>
 <td>
-	Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response.
+  Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response.
 </td>
 <td>
-	JSON or Form-Encoded response with braille ASCII based on sent plain text.
+  JSON or Form-Encoded response with braille ASCII based on sent plain text.
 </td>
 </tr>
 
 <tr>
 <td>
-	404
+  404
 </td>
 <td>
-	The only active endpoint is /braille and /braile.json. It only accepts POST. You will get this error code if you try to GET or POST to any other endpoint.
+  The only active endpoint is `braille` and `braile.json`. It only accepts POST. You will get this error code if you try to GET or POST to any other endpoint.
 </td>
 <td>
-	"Not found; only POST is allowed. See documentation here: https://github.com/corybohon/braille/tree/master/remote-liblouis"
-</td>
-</tr>
-<tr>
-<td>
-	501
-</td>
-<td>
-	The text in the content body is blank. You must include a parameter key named "content" that has a value that contains the text you wish to convert to braille ascii.
-</td>
-<td>
-	"You must specify content to convert to braille."
+  "Not found; only POST is allowed. See documentation here: https://github.com/umd-mith/braille/tree/master/remote-liblouis"
 </td>
 </tr>
 <tr>
 <td>
-	502
+  501
 </td>
 <td>
-	An error occured while translating your text -- the ouput from xml2brl contained no text. If problem persists, ensure that xml2brl is functioning properly on your system.
+  The text in the content body is blank. You must include a parameter key named "content" that has a value that contains the text you wish to convert to braille ascii.
 </td>
 <td>
-	"Content not successfuly converted to braille." 
+  "You must specify content to convert to braille."
+</td>
+</tr>
+<tr>
+<td>
+  502
+</td>
+<td>
+  An error occured while translating your text -- the ouput from xml2brl contained no text. If problem persists, ensure that xml2brl is functioning properly on your system.
+</td>
+<td>
+  "Content not successfuly converted to braille." 
 </td>
 </tr>
 </table>
 
-##Changelog
+## Changelog
+
 **Version 1.0**
 
 - Inclusion of a JSON endpoint for the service; additional tweaks to the documentation and code documentation.
@@ -143,5 +148,6 @@ The response body of the request that is returned will include the braille ascii
 
 - Initial version of the service available for beta testing
 
-##License
+## License
+
 Remote-LibLouis is released under the [MIT Open Source License](http://opensource.org/licenses/MIT).

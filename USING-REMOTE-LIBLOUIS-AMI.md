@@ -44,6 +44,8 @@ Once you have changed any settings that you need to, select the "Review and Laun
 
 After launching the service, you can configure your WordPress site to use this service. The URL will be based on the IP address of the service as reported in Step 4. For example, if the IP address is 192.168.125.4, then the URL of the service is http://192.168.125.4/braille.json. See the documentation for the WordPress plugin for more information on configuring the plugin to use the remote LibLouis service.
 
+![Showing where the service URL is configured in the WordPress plugin](image/marked-braille-plugin.png)
+
 ## Server organization
 
 The server is running Ubuntu 12.04 LTS.

@@ -20,6 +20,8 @@ One of the options on the left side of the page is ["AMIs"](https://console.aws.
 
 In the AMI view, [you should search public images (left-most filter at the top) for an AMI matching `ami-a5c892cc`](https://console.aws.amazon.com/ec2/v2/home#Images:filter=all-images;platform=all-platforms;visibility=public-images;search=ami-a5c892cc).
 
+![Showing the expected results of searching for the LibLouis service AMI](images/select-ami.png)
+
 ### Step 4: Launch the Service
 
 Select the `liblouis-service` AMI and then the "Launch" button. From here, you can select the instance type and other settings as you need. If you are trying out the service for the first time or you don't need to make thousands of requests per hour, you should be fine with the default micro instance.

@@ -4,18 +4,16 @@ if($use_remote) {
   require_once 'lib/LibLouis-Remoter.php';
 }
 else {
-  require_once 'lib/LibLouis.php';
+  require_once 'lib/php-liblouis.php';
 }
 
 /*
 Plugin Name: Braille
 Plugin URI: http://umd-mith.github.com/braille/
-Description: Takes post text bracketed by shortcode and reprints on screen.
-Version: 1.0
+Description: This plugin allows you to incorporate SimBraille or BRL formatted text from English text.
+Version: 0.0.3
 Author: University of Maryland, Maryland Institute for Technology in the Humanities
 Author URI: http://mith.umd.edu/
-Contributer: Amanda Visconti (literaturegeek)
-Contributer URI: http://literaturegeek.com
 License: GNU
 */
 
@@ -57,14 +55,16 @@ add_filter( 'comment_excerpt', 'braille_comment_text' );
 add_filter( 'the_author', 'braille_author' );
 add_filter( 'widget_title', 'braille_widget_title' );
 
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-if ( is_plugin_active( 'anthologize/anthologize.php' ) ) {
-  require_once ( WP_PLUGIN_DIR . '/anthologize/anthologize.php' );
-  anthologize_register_format("BRL", __( "Braille", "braille" ), WP_PLUGIN_DIR . '/braille/templates/brl/output.php' );
-  $htmlFontSizes = array('48pt'=>'48 pt', '36pt'=>'36 pt', '18pt'=>'18 pt', '14'=>'14 pt', '12'=>'12 pt');
-  anthologize_register_format_option("BRL", 'font-size', __( 'Font Size', 'anthologize' ), 'dropdown', $htmlFontSizes, '14pt');
-  anthologize_register_format_option( 'BRL', 'download', __('Download Braille?', 'braille'), 'checkbox', array('Download'=>'download'), 'download');
-  anthologize_register_format_option( 'BRL', 'utf8', __('Convert BRL to SimBraille?', 'braille'), 'checkbox', array('UTF8' => 'utf8'), 'utf8');
+add_action( 'plugins_loaded', 'braille_plugins_loaded');
+
+function braille_plugins_loaded() {
+  if (function_exists( 'anthologize_register_format_option' ) && function_exists( 'anthologize_register_format')) {
+    anthologize_register_format("BRL", __( "Braille", "braille" ), WP_PLUGIN_DIR . '/braille/templates/brl/output.php' );
+    $htmlFontSizes = array('48pt'=>'48 pt', '36pt'=>'36 pt', '18pt'=>'18 pt', '14'=>'14 pt', '12'=>'12 pt');
+    anthologize_register_format_option("BRL", 'font-size', __( 'Font Size', 'anthologize' ), 'dropdown', $htmlFontSizes, '14pt');
+    anthologize_register_format_option( 'BRL', 'download', __('Download Braille?', 'braille'), 'checkbox', array('Download'=>'download'), 'download');
+    anthologize_register_format_option( 'BRL', 'utf8', __('Convert BRL to SimBraille?', 'braille'), 'checkbox', array('UTF8' => 'utf8'), 'utf8');
+  }
 }
 
 function braille_admin_menu() {
@@ -86,17 +86,17 @@ function braille_settings_page() {
 
   if( isset( $_POST["update_braille_settings"] ) 
    && $_POST["update_braille_settings"] == 'Y' ) {
-  update_option( "braille_use_remote", $_POST["braille_use_remote"] );
-  update_option( "braille_local_path", $_POST["braille_local_path"] );
-  update_option( "braille_remote_url", $_POST["braille_remote_url"] );
-  update_option( "braille_filter_content", $_POST["braille_filter_content"] );
-  update_option( "braille_filter_title", $_POST["braille_filter_title"] );
-  update_option( "braille_filter_wp_title", $_POST["braille_filter_wp_title"] );
-  update_option( "braille_filter_comment", $_POST["braille_filter_comment"] );
-  update_option( "braille_filter_widget_title", $_POST["braille_filter_widget_title"] );
+  update_option( "braille_use_remote", !!$_POST["braille_use_remote"] );
+  update_option( "braille_local_path", sanitize_file_name($_POST["braille_local_path"]) );
+  update_option( "braille_remote_url", sanitize_text_field($_POST["braille_remote_url"]) );
+  update_option( "braille_filter_content", !!$_POST["braille_filter_content"] );
+  update_option( "braille_filter_title", !!$_POST["braille_filter_title"] );
+  update_option( "braille_filter_wp_title", !!$_POST["braille_filter_wp_title"] );
+  update_option( "braille_filter_comment", !!$_POST["braille_filter_comment"] );
+  update_option( "braille_filter_widget_title", !!$_POST["braille_filter_widget_title"] );
   
   
-  update_option( "braille_display_utf8", $_POST["braille_display_utf8"] );
+  update_option( "braille_display_utf8", !!$_POST["braille_display_utf8"] );
   ?>
   <div class="updated">
       <p><strong><?php _e('settings save.', 'braille' ); ?></strong></p>

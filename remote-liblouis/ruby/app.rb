@@ -14,6 +14,21 @@ not_found do
 
 end
 
+get '/braille' do
+	status 405
+	"Only POST is allowed. See documentation here: https://github.com/corybohon/braille/tree/master/remote-liblouis"
+end
+
+put '/braille' do
+	status 405
+	"Only POST is allowed. See documentation here: https://github.com/corybohon/braille/tree/master/remote-liblouis"
+end
+
+delete '/braille' do
+	status 405
+	"Only POST is allowed. See documentation here: https://github.com/corybohon/braille/tree/master/remote-liblouis"
+end
+
 ##User is posting to the /braille endpoint
 post '/braille' do
 	
@@ -45,7 +60,7 @@ post '/braille' do
 			
 				##Exit with status code 502
 				status 502
-				"Content not successfully converted to braille." 
+				"Content not successfully converted to Braille." 
 				
 			end
 	
@@ -71,8 +86,8 @@ post '/braille' do
 		input_file.unlink
 		output_file.unlink
 		
-		status 501
-		"You must specify content to convert to braille."
+		status 400
+		"You must specify content to convert to Braille."
 			
 	end
 
@@ -138,8 +153,8 @@ post '/braille.json' do
 		input_file.unlink
 		output_file.unlink
 		
-		status 501
-		"You must specify content to conver to braille.".to_json
+		status 400
+		"You must specify content to convert to Braille.".to_json
 	
 	end
 		

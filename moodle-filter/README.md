@@ -42,4 +42,4 @@ Once you have a remote translation service available, you can configure the Mood
 
 In the following image, we have copied the location of the remote translation service from the instructions for setting up an instance of the translation service on Amazon's EC2 cloud service.
 
-![Setting the location of the remote translation service.](../../images/marked-moodle-filter-configuration.png)
+![Setting the location of the remote translation service.](../images/marked-moodle-filter-configuration.png)

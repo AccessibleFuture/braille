@@ -1,15 +1,5 @@
 <?php
 /**
- * Moodle - Filter for converting TeX expressions to cached gif images
- *
- * This Moodle text filter converts TeX expressions delimited
- * by either $$...$$ or by <tex...>...</tex> tags to gif images using
- * mimetex.cgi obtained from http: *www.forkosh.com/mimetex.html authored by
- * John Forkosh john@forkosh.com.  Several binaries of this areincluded with
- * this distribution.
- * Note that there may be patent restrictions on the production of gif images
- * in Canada and some parts of Western Europe and Japan until July 2004.
- *
  * @package    filter
  * @subpackage braille
  * @copyright  2013 University of Maryland

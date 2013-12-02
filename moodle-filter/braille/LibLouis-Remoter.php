@@ -6,6 +6,7 @@
 
 	View README.md for information on how to use this library. 
 
+    This file is covered under the MIT license.
 */
 
 

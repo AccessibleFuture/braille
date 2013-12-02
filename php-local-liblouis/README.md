@@ -1,10 +1,10 @@
-# PHP-LibLouis v.0.9
+# PHP-LibLouis
 
 PHP-LibLouis is a PHP Library that lets you interact with LibLouisXML directly from PHP code.
 
 ## About the Library 
 
-The `PHP-LibLouis` is a PHP library with the goal of the library, making interacting with the command line tool `file2brl (LibLouisXML)` an easy experience in PHP. This library allows complete braille translations from `PHP-LibLouis` library calls. The library allows interaction with the `file2brl` program from within PHP without any knowledge of system calls.
+The `PHP-LibLouis` is a PHP library with the goal of the library, making interacting with the command line tool `file2brl` (LibLouisXML) an easy experience in PHP. This library allows complete braille translations from `PHP-LibLouis` library calls. The library allows interaction with the `file2brl` program from within PHP without any knowledge of system calls.
 
 ## What you need to use PHP-LibLouis
 
@@ -12,7 +12,7 @@ In order to use the `PHP-LibLouis` PHP framework in your applications, you must 
 
 ### System Requirements
 
-The system that `PHP-LibLouis` is running on **must have** `file2brl (LibLouisXML)` and the LibLouis packages installed. Furthermore, this software has only been tested on L/MAMP-compatible environments.
+The system that `PHP-LibLouis` is running on **must have** `file2brl` (LibLouisXML) and the LibLouis packages installed. Furthermore, this software has only been tested on L/MAMP-compatible environments.
 
 #### Installing file2brl on Linux Systems
 
@@ -24,13 +24,13 @@ $ sudo apt-get install liblouisutdml-bin
 
 ### PHP Requirements
 
-PHP **must** be able to make a system call using the `system()`, `passthru`, and `exec()` functions. `PHP-LibLouis` relies on this link to be able to call the `file2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this functionality will result in the inability to use `PHP-LibLouis` with your setup. Furthermore, `PHP-LibLouis` will run only on PHP v5.0 and higher, and the use of tempfiles must be allowed.
+PHP **must** be able to make a system call using the `system()`, `passthru()`, and `exec()` functions. `PHP-LibLouis` relies on this link to be able to call the `file2brl` program and pass data back and forth. On some systems (notably shared hosts), this functionality will most likely be disabled. Disabling this functionality will result in the inability to use `PHP-LibLouis` with your setup. Furthermore, `PHP-LibLouis` will run only on PHP v5.0 and higher, and the use of tempfiles must be allowed. If you are unable to meet these requirements, you may want to consider using the [translation service library](../php-remote-liblouis) instead.
 
 ## Interacting with the Library
 
 ### Including PHP-LibLouis in your project 
 
-You will first need to download the PHP-LibLouis framework, and then place the 'PHP-Liblouis' folder inside of your PHP project. Then, in order to use the functionality, you will need to include the `php-liblouis.php` file in your PHP project. 
+You will first need to download the PHP-LibLouis framework, and then place the contents of the 'php-local-liblouis' folder inside of your PHP project. Then, in order to use the functionality, you will need to include the `php-liblouis.php` file in your PHP project. 
 
 ```php
 <?php
@@ -70,8 +70,8 @@ $textToBeTranslated = "Hello, World!";
 $translatedText = returnBrailleForString($textToBeTranslated, kNoOptions);
 
 if($translatedText == kErrorTranslating_NoText || 
-   $translatedText == kErrorHandlingFile || 
-   $translatedText == kErrorReceivingFile)
+   $translatedText == kErrorHandlingFile       || 
+   $translatedText == kErrorReceivingFile       )
 {
   //translation failed
 }
@@ -98,8 +98,8 @@ $textToBeTranslated = "Hello, World!";
 $fileWithTranslatedText = returnBRFFileForString($textToBeTranslated, kNoOptions);
 
 if($fileWithTranslatedText == kErrorTranslating_NoText || 
-   $fileWithTranslatedText == kErrorHandlingFile || 
-   $fileWithTranslatedText == kErrorReceivingFile)
+   $fileWithTranslatedText == kErrorHandlingFile       || 
+   $fileWithTranslatedText == kErrorReceivingFilem      )
 {
   //translation failed
 }
@@ -116,13 +116,13 @@ unlink($fileWithTranslatedText);
 
 There are many helpful constants that make `PHP-LibLouis` easier to check for errors and all-around easier to use. Below are all of the constants that `PHP-LibLouis` uses. 
 
-####Option Constants 
+#### Option Constants 
 
 | Option Constant Name | Description |
 | -------------------- | ----------- |
 | kNoOptions           | Uses the standard `file2brl` translation options. |
 
-####Error Constants
+#### Error Constants
 
 The error constants make it easier to detect and check for errors in your program's logic. Here are the error constants that PHP-LibLouis uses. 
 
@@ -135,7 +135,7 @@ The error constants make it easier to detect and check for errors in your progra
 
 ### Temp Files
 
-`PHP-LibLouis` utilizes PHP tempfiles to interact with the `file2brl` command line program. As a result, two temp files will be stored on your system at `/tmp` for every system call made to `PHP-LibLouis`. If an error is encountered, or if you are using the `returnBrailleForString()` function, then all of the temp files at this location will be cleaned up automatically by initiating a call to the `unlink()` PHP function. **However, the translated text file that is returned by `returnBRFFileForString()` will not be cleaned up automatically through the `unlink()` PHP function -- it is up to your program to clean up the remaining temp file resulting from the use of the `returnBRFFileForString()` .**
+`PHP-LibLouis` utilizes PHP tempfiles to interact with the `file2brl` command line program. As a result, two temp files will be stored on your system at `/tmp` for every system call made to `PHP-LibLouis`. If an error is encountered, or if you are using the `returnBrailleForString()` function, then all of the temp files at this location will be cleaned up automatically by initiating a call to the `unlink()` PHP function. **However, the translated text file that is returned by `returnBRFFileForString()` will not be cleaned up automatically through the `unlink()` PHP function&mdash;it is up to your program to clean up the remaining temp file resulting from the use of `returnBRFFileForString()` .**
 
 ### Options
 

@@ -20,4 +20,4 @@ MITH has produced an Amazon EC2 machine image (AMI) with all of the required sof
 
 ## PHP Libraries
 
-Two libraries, [`php-local-liblouis/`](./php-local-liblouis) and [`php-remote-liblouis/`](./php-remote-liblouis) are providede for interfacing with a local installation of the LibLouis libary or a remote translation service, respectively. These libraries are included in the WordPress module. The remote translation service library is included in the Moodle filter.
+Two libraries, [`php-local-liblouis/`](./php-local-liblouis) and [`php-remote-liblouis/`](./php-remote-liblouis), are providede for interfacing with a local installation of the LibLouis libary or a remote translation service, respectively. These libraries are included in the WordPress module. The remote translation service library is included in the Moodle filter.

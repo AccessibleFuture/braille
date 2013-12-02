@@ -1,6 +1,6 @@
-# Braille Translation Moodle Filter
+# Braille Translation Filter for Moodle 2.x
 
-This plugin should be considered to be alpha software for now. It is being developed with active testing on a single Moodle installation. While it may be useful in conjunction with a braille translation service, it is not packaged and distributed as a one-click installation. However, the following Moodle documentation may prove helpful in installing and configuring the filter.
+This plugin should be considered to be alpha software for now. It is being developed with active testing on a single Moodle installation. While it may be useful in conjunction with a Braille translation service, it is not packaged and distributed as a one-click installation. However, the following Moodle documentation may prove helpful in installing and configuring the filter.
 
 * [Basic Moodle Filter Development](http://docs.moodle.org/dev/Filters)
 * [Managing Filters](http://docs.moodle.org/26/en/Managing_filters)
@@ -13,7 +13,9 @@ The filter provides a number of shortcodes.
 
 This shortcode allows you to enter the dot codes for Braille characters to be rendered using the UTF-8 range for Braille. The result is the display of the dot patterns on the computer display. The text is encoded in the web page as Braille, so any user software should be able to distinguish the appearance of Braille characters from non-Braille characters.
 
-    [BDots 123 0 456]
+```
+[BDots 123 0 456]
+```
 
 The above example will result in three Braille cells. The first cell will show the left column of dots. The second cell will show no dots (i.e., a Braille spacing character). The third cell will show the right column of dots.
 
@@ -25,7 +27,9 @@ Other characters may be mixed in with the numbers for legibility. For example, a
 
 This shortcode allows you to translate English text into the ASCII codes for embossing Braille. The translation service works well with plain ASCII English text, but doesn't handle some special characters such as em-dashes. The translation service also does not work with Nemeth Braille for math text.
 
-    [EmbBraille]English text to be translated to embossing codes.[/EmbBraille]
+```
+[EmbBraille]English text to be translated to embossing codes.[/EmbBraille]
+```
 
 **N.B.:** This shortcode requires the configuration of the remote translation service. For more information, see the configuration section below.
 
@@ -33,7 +37,9 @@ This shortcode allows you to translate English text into the ASCII codes for emb
 
 This shortcode allows you to translate English text into the UTF-8 codes for Braille. The translation service works well with plain ASCII English text, but doesn't handle some special characters such as em-dashes. The translation service also does not work with Nemeth Braille for math text.
 
-    [SimBraille]English text to be translated to UTF-8 Braille codes.[/SimBraille]
+```
+[SimBraille]English text to be translated to UTF-8 Braille codes.[/SimBraille]
+```
 
 **N.B.:** This shortcode requires the configuration of the remote translation service. For more information, see the configuration section below.
 

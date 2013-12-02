@@ -54,7 +54,7 @@ require_once 'php-liblouis.php';
 
 There are numerous library functions that aid in the ability to translate a plain text string into various braille outputs.
 
-### `function returnBrailleForString($textToTranslate, $libLouisOptions)`
+### returnBrailleForString($textToTranslate, $libLouisOptions)
 
 When called, this function will return a Braille ASCII encoded string that can be used by your program at will. The `$textToTranslate` variable should be a plain-text string that you wish to translate into a Braille ASCII string of text. If the translation fails, then the function `returnBrailleForString` will return a constant of either `kErrorTranslating_NoText`, `kErrorHandlingFile`, or `kErrorReceivingFile`. Anything else should be considered a successfully translated string of text.
 
@@ -82,7 +82,7 @@ else
 ?>
 ```
 
-### `function returnBRFFileForString($textToTranslate, $libLouisOptions)`
+### returnBRFFileForString($textToTranslate, $libLouisOptions)
 
 When called, this function will return a PHP tempfile with the Braille ASCII contents included that can be used in your program at will. The `$textToTranslate` variable should be a plain-text string that you wish to translate into a braille-ready file. Remember that the tempfile that is returned will not be `unlinked` by `PHP-LibLouis`. It is up to you to call `unlink($file)` to remove the temp file.
 

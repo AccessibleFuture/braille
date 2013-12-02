@@ -33,6 +33,17 @@ The Braille plugin provides a Braille output type for the [Anthologize plugin](h
 
 **N.B.:** This plugin requires [LibLouis](https://code.google.com/p/liblouisutdml/) installed on the same system as the WordPress site or access to a remote service providing LibLouis functionality. [A free and public Amazon machine image is available with the necessary software installed and configured.](https://github.com/umd-mith/braille/blob/master/USING-REMOTE-LIBLOUIS-AMI.md)
 
+= Configuration =
+
+The plugin uses [LibLouis](https://code.google.com/p/liblouisutdml/) to translate English text into Braille. You either need LibLouis installed on the same machine as your WordPress installation or access to a remote LibLouis service such as the one provided by the [example remote LibLouis service](https://github.com/umd-mith/braille/tree/master/remote-liblouis).
+
+1. Go to Plugins screen and find the Braille plugin in the list.
+2. Click on the plugin to go to the configuration screen.
+3. Select "Local" or "Remote" LibLouis.
+    1. If "Local" LibLouis, place the full path of the executable in the text box (e.g., `/usr/local/bin`).
+    2. If "Remote" LibLouis, place the full URL of the JSON service in the appropriate text box (e.g., if using the example remote-liblouis service mentioned above, use the `braille.json` endpoint). [Information is available on using a free and public Amazon machine image to provide the remote LibLouis service.](https://github.com/umd-mith/braille/blob/master/USING-REMOTE-LIBLOUIS-AMI.md) See the first screenshot for where the remote service URL is configured.
+4. Select the appropriate options for which parts of the website should be translated to Braille. If you are using this plugin to provide Braille translation for Anthologize, you do not need to select anything here.
+
 == Screenshots ==
 
 1. This screenshot shows how to configure the Braille plugin to make use of a remote LibLouis translation service. The actual IP address or hostname will depend on where the service is hosted.
@@ -61,17 +72,6 @@ To install this plugin manually:
 4. Upload the plugin folder to the `wp-content/plugins` folder in your WordPress directory.
 5. Go to Plugins screen and find the newly uploaded plugin in the list.
 6. Select **Activate Plugin** to activate it.
-
-== Configuration ==
-
-The plugin uses [LibLouis](https://code.google.com/p/liblouisutdml/) to translate English text into Braille. You either need LibLouis installed on the same machine as your WordPress installation or access to a remote LibLouis service such as the one provided by the [example remote LibLouis service](https://github.com/umd-mith/braille/tree/master/remote-liblouis).
-
-1. Go to Plugins screen and find the Braille plugin in the list.
-2. Click on the plugin to go to the configuration screen.
-3. Select "Local" or "Remote" LibLouis.
-    1. If "Local" LibLouis, place the full path of the executable in the text box (e.g., `/usr/local/bin`).
-    2. If "Remote" LibLouis, place the full URL of the JSON service in the appropriate text box (e.g., if using the example remote-liblouis service mentioned above, use the `braille.json` endpoint). [Information is available on using a free and public Amazon machine image to provide the remote LibLouis service.](https://github.com/umd-mith/braille/blob/master/USING-REMOTE-LIBLOUIS-AMI.md) See the first screenshot for where the remote service URL is configured.
-4. Select the appropriate options for which parts of the website should be translated to Braille. If you are using this plugin to provide Braille translation for Anthologize, you do not need to select anything here.
 
 == Frequently Asked Questions ==
 

@@ -10,7 +10,7 @@ This plugin requires a local installation of LibLouis or access to a remote LibL
 
 ## Moodle Braille Filter
 
-A simple filter is provided in [`moodle-filter/`](./moodle-filter) that allows Moodle to display Braille content.
+A simple filter is provided in [`moodle-filter/`](./moodle-filter) that allows Moodle to display Braille content. This filter is in early development. While it may be useful in conjunction with a braille translation service, it is not packaged and distributed as a one-click installation.
 
 ## Remote LibLouis Translation Service
 

@@ -1,6 +1,9 @@
 # Braille Translation Moodle Filter
 
-This plugin should be considered to be alpha software for now. It is being developed with active testing on a single Moodle installation. 
+This plugin should be considered to be alpha software for now. It is being developed with active testing on a single Moodle installation. While it may be useful in conjunction with a braille translation service, it is not packaged and distributed as a one-click installation. However, the following Moodle documentation may prove helpful in installing and configuring the filter.
+
+* [Basic Moodle Filter Development](http://docs.moodle.org/dev/Filters)
+* [Managing Filters](http://docs.moodle.org/26/en/Managing_filters)
 
 ## Shortcodes
 

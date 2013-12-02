@@ -17,3 +17,7 @@ A simple filter is provided in [`moodle-filter/`](./moodle-filter) that allows M
 An example remote service providing LibLouis translations for the WordPress plugin is available in the [`remote-liblouis/`](./remote-liblouis) directory. The available version is a Ruby Sinatra application.
 
 MITH has produced an Amazon EC2 machine image (AMI) with all of the required software installed. This AMI is public and freely available. See [these instructions](./USING-REMOTE-LIBLOUIS-AMI.md) for more information.
+
+## PHP Libraries
+
+Two libraries, [`php-local-liblouis`](./php-local-liblouis) and [`php-remote-liblouis`](./php-remote-liblouis) are providede for interfacing with a local installation of the LibLouis libary or a remote translation service, respectively. These libraries are included in the WordPress module. The remote translation service library is included in the Moodle filter.

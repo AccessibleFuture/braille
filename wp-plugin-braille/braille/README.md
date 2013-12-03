@@ -1,5 +1,7 @@
 # braille
 
+|                    |                                          |
+| ------------------ | ---------------------------------------- |
 | Contributors:      | corybohon, literaturegeek, jgsmith       |
 | Stable tag:        | 0.0.4                                    |
 | Tags:              | plugin, braille, anthologize             |

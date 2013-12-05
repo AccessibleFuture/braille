@@ -30,7 +30,7 @@ Response Body:
 }
 ```
 
-The response body of the request that is returned will include the braille ascii text for the plain text sent to the service in the "content" key value.
+The response body of the request that is returned will include the Braille ASCII text for the plain text sent to the service in the "content" key value.
 
 ### Form-Encoded Data
 
@@ -50,7 +50,7 @@ Response Body:
 
     ,hello1 _w6
 
-The response body of the request that is returned will include the braille ascii text suitable for embossing for the plain text sent to the service.
+The response body of the request that is returned will include the Braille ASCII text suitable for embossing for the plain text sent to the service.
 
 ## API Status Codes
 

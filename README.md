@@ -10,14 +10,14 @@ This plugin requires a local installation of LibLouis or access to a remote LibL
 
 ## Moodle Braille Filter
 
-A simple filter is provided in [`moodle-filter/`](./moodle-filter) that allows Moodle to display Braille content. This filter is in early development. While it may be useful in conjunction with a braille translation service, it is not packaged and distributed as a one-click installation.
+A simple filter is provided in [`moodle-filter/`](./moodle-filter) that allows Moodle to display Braille content. This filter is in early development. While it may be useful in conjunction with a Braille translation service, it is not packaged and distributed as a one-click installation.
 
 ## Remote LibLouis Translation Service
 
-An example remote service providing LibLouis translations for the WordPress plugin is available in the [`remote-liblouis/`](./remote-liblouis) directory. The available version is a Ruby Sinatra application.
+An example remote service providing LibLouis translations for the WordPress plugin is available in the [`remote-liblouis/`](./remote-liblouis) directory. The available version is a [Ruby](https://www.ruby-lang.org/en/) [Sinatra](http://www.sinatrarb.com/) application.
 
 MITH has produced an Amazon EC2 machine image (AMI) with all of the required software installed. This AMI is public and freely available. See [these instructions](./USING-REMOTE-LIBLOUIS-AMI.md) for more information.
 
 ## PHP Libraries
 
-Two libraries, [`php-local-liblouis/`](./php-local-liblouis) and [`php-remote-liblouis/`](./php-remote-liblouis), are providede for interfacing with a local installation of the LibLouis libary or a remote translation service, respectively. These libraries are included in the WordPress module. The remote translation service library is included in the Moodle filter.
+Two libraries, [`php-local-liblouis/`](./php-local-liblouis) and [`php-remote-liblouis/`](./php-remote-liblouis), are provided for interfacing with a local installation of the LibLouis library or a remote translation service, respectively. These libraries are included in the WordPress module. The remote translation service library is included in the Moodle filter.

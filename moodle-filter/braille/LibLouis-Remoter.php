@@ -16,9 +16,10 @@
 
 function returnBrailleForString($textToTranslate, $url)
 {
-  //convert the passed content into an array, and then JSON encode it 
   $content = json_encode(array("content" => $textToTranslate));
   
+  # Use the WordPress function if it's available - otherwise, fall back to
+  # using libcurl.
   if(function_exists('wp_remote_post')) {
     $response = wp_remote_post( $url, array(
       'method' => 'POST',
@@ -40,7 +41,8 @@ function returnBrailleForString($textToTranslate, $url)
     }
   }
   else {
-    //cURL implementation to handle posting the content and getting a response back
+    # cURL implementation to handle posting the content and 
+    # getting a response back
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_HEADER, false);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -51,33 +53,30 @@ function returnBrailleForString($textToTranslate, $url)
     curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 
-    //get the response after executing cURL
     $json_response = curl_exec($curl);
     
-    //get the status from cURL
     $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     
-    //anything other than a status code of 200 is an error
     if ( $status != 200 ) {
-        die("Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
+        die(
+          "Error: call to URL $url failed with status $status, " .
+          "response $json_response, curl_error " . 
+          curl_error($curl) . ", curl_errno " . curl_errno($curl)
+        );
     }
     
-    //close the connection 
     curl_close($curl);
   }
-  //decode the response
+
   $response = json_decode($json_response, true);
   
-  //return the 'content' string of the response
   return $response['content'];
 }
 
 function returnBRFFileForString($textToTranslate, $url)
 {
-  //convert the passed content into an array, and then JSON encode it 
   $content = json_encode(array("content" => $textToTranslate));
 
-  //cURL implementation to handle posting the content and getting a response back
   $curl = curl_init($url);
   curl_setopt($curl, CURLOPT_HEADER, false);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -88,40 +87,38 @@ function returnBRFFileForString($textToTranslate, $url)
   curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
   curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 
-  //get the response after executing cURL
   $json_response = curl_exec($curl);
   
-  //get the status from cURL
   $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
   
-  //anything other than a status code of 200 is an error
   if ( $status != 200 ) {
-      die("Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
+      die(
+        "Error: call to URL $url failed with status $status, " .
+        "response $json_response, curl_error " . 
+        curl_error($curl) . ", curl_errno " . curl_errno($curl)
+      );
   }
   
-  //close the connection 
   curl_close($curl);
   
-  //decode the response
   $response = json_decode($json_response, true);
   
-  //create temp file
+  # create temporary filename
   $_translatedText = tempnam(sys_get_temp_dir(), "pll_");
   
-  //check for errors
   if($_translatedText == FALSE)
   {
       return "";
   }
   else
   {
-      //Write the contents of the passed text to the temp file
-      $_handle = fopen($response['content'], "w");
-      fwrite($_handle, $text);
+      # Write the contents of the passed text to the temporary file
+      $_handle = fopen($_translatedText, "w");
+      fwrite($_handle, $response);
       fclose($_handle);
   }
 
-  //return the file
+  # return the filename
   return $_translatedText;
 
 }

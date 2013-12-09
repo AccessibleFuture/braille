@@ -11,7 +11,7 @@
 */
 ini_set('display_errors', 1);
 
-//This function will perform the system call to xml2brl on the command line 
+//This function will perform the system call to file2brl on the command line 
 // because regardless of the call type a file will need to be created, 
 // the function will go ahead and create all of the necessary components 
 // required by both BRF and Braille ascii return, then will handle the 
@@ -24,9 +24,9 @@ function _performSystemCall($callType, $text, $options = kNoOptions)
         return kErrorTranslating_NoText;
     }
         
-    //Create the temporary files that will be passed to xml2brl
-    $_standardText = tempnam("/tmp", "pll_");
-    $_translatedText = tempnam("/tmp", "pll_");
+    //Create the temporary files that will be passed to file2brl
+    $_standardText = tempnam(sys_get_temp_dir(), "pll_");
+    $_translatedText = tempnam(sys_get_temp_dir(), "pll_");
         
     //if the temp files had an error, then unlink and error out
     if($_standardText == FALSE || $_translatedText == FALSE)
@@ -46,11 +46,13 @@ function _performSystemCall($callType, $text, $options = kNoOptions)
     if($options != kNoOptions)
     {
         //no options, then create the command
+        //TODO: allow path to be set and used - don't rely on $PATH
         $command = escapeshellcmd("file2brl -p" . " " . $_standardText . " " .  $_translatedText);
     }
     else
     {
         //right now, we don't handle options, so we'll just create the command sans options
+        //TODO: allow path to be set and used - don't rely on $PATH
         $command = escapeshellcmd("file2brl -p" . " " . $_standardText . " " .  $_translatedText);
     }
     
@@ -68,7 +70,8 @@ function _performSystemCall($callType, $text, $options = kNoOptions)
             unlink($_standardText);
             unlink($_translatedText);
             return kErrorReceivingFile;
-        }else{
+        }
+        else {
             $_fileContents = fread($_handle, filesize($_translatedText));
         }
     
@@ -79,7 +82,8 @@ function _performSystemCall($callType, $text, $options = kNoOptions)
         
         if($_fileContents){
             return $_fileContents;
-        }else{
+        }
+        else {
             unlink($_standardText);
             unlink($_translatedText);
             return kErrorReceivingFile;

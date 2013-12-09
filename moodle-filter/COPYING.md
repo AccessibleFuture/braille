@@ -1,4 +1,4 @@
-For the purposes of this notice, the words "this filter" refer to the files in the `braille/` directory except for `LibLouis-Remoter.php`, which is covered by the GPLv3.
+For the purposes of this notice, the words "this filter" refer to the files in the `braille/` directory except for `LibLouis-Remoter.php`, which is covered by the GPLv2.
 
 
 This filter is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

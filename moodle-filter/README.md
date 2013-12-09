@@ -15,33 +15,34 @@ The filter provides a number of short codes.
 
 ### BDots
 
-This short code allows you to enter the dot codes for Braille characters to be
-rendered using the UTF-8 range for Braille. The result is the display of the
-dot patterns on the computer display. The text is encoded in the web page as
-Braille, so any user software should be able to distinguish the appearance of
-Braille characters from non-Braille characters.
+This short code allows you to enter the dot codes for Braille characters to
+be rendered using the UTF-8 range for Braille. The result is the display of
+the dot patterns on the computer display. The text is encoded in the web
+page as Braille, so any user software should be able to distinguish the
+appearance of Braille characters from non-Braille characters.
 
 ```
 [BDots 123 0 456]
 ```
 
-The above example will result in three Braille cells. The first cell will show
-the left column of dots. The second cell will show no dots (i.e., a Braille
-spacing character). The third cell will show the right column of dots.
+The above example will result in three Braille cells. The first cell will
+show the left column of dots. The second cell will show no dots (i.e., a
+Braille spacing character). The third cell will show the right column of
+dots.
 
 Underscores and zeros are interchangeable for a Braille spacing cell.
 
-Other characters may be mixed in with the numbers for legibility. For example,
-all of the following are equivalent: `124` `1.2.4` `1-2-4` `1_2_4` `12.4..`.
-As long as the cell patterns are separated by spaces, any non-digit characters
-are ignored.
+Other characters may be mixed in with the numbers for legibility. For
+example, all of the following are equivalent: `124` `1.2.4` `1-2-4` `1_2_4`
+`12.4..`. As long as the cell patterns are separated by spaces, any
+non-digit characters are ignored.
 
 ### EmbBraille
 
 This short code allows you to translate English text into the ASCII codes for
-embossing Braille. The translation service works well with plain ASCII English
-text, but doesn't handle some special characters such as em-dashes. The
-translation service also does not work with Nemeth Braille for math text.
+embossing Braille. The translation service works well with plain ASCII
+English text, but doesn't handle some special characters such as em-dashes.
+The translation service also does not work with Nemeth Braille for math text.
 
 ```
 [EmbBraille]English text to be translated to embossing codes.[/EmbBraille]

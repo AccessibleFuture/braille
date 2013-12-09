@@ -1,6 +1,10 @@
 # Remote LibLouis Translation Service
 
-The remote translation service provides a simple API. The [Ruby version](./ruby) is an example implementation of this API. Implementations in other languages will be placed here as they are developed and made available. The [Amazon machine image](../USING-REMOTE-LIBLOUIS-AMI.md) uses the Ruby implementation.
+The remote translation service provides a simple API. The [Ruby
+version](./ruby) is an example implementation of this API. Implementations in
+other languages will be placed here as they are developed and made available.
+The [Amazon machine image](../USING-REMOTE-LIBLOUIS-AMI.md) uses the Ruby
+implementation.
 
 ## API
 
@@ -8,21 +12,19 @@ The remote translation service provides a simple API. The [Ruby version](./ruby)
 
 HTTP Request:
 
-    POST http://localhost:1234/braille.json
-  
-When posting to the `braille.json` endpoint, use POST, and include the text that you wish to convert as the value of the key named "content". 
-
-#### JSON-Encoded Example
-
-HTTP Body: 
-
-```json
-{
-    "content": "Hello, world!"
-}
+```
+POST http://localhost:1234/braille.json
 ```
 
-Response Body: 
+```bash
+$ cat <<'EOJ' | curl --data-ascii "@-" -H "Content-Type: application/json" http://localhost:1234/braille.json
+{
+  "content": "Hello, world!"
+}
+EOJ
+```
+
+Response: 
 
 ```json
 {
@@ -30,33 +32,41 @@ Response Body:
 }
 ```
 
-The response body of the request that is returned will include the Braille ASCII text for the plain text sent to the service in the "content" key value.
+The response body of the request that is returned will include the Braille
+ASCII text for the plain text sent to the service in the "content" key value.
 
 ### Form-Encoded Data
 
+When posting to the `braille` endpoint (without the `.json` extension), use
+POST, and include the text that you wish to convert as the value of a key
+named "content".
+
 HTTP Request:
 
-    POST http://localhost:1234/braille
+```
+POST http://localhost:1234/braille
+```
 
-When posting to the `braille` endpoint (without the `.json` extension), use POST, and include the text that you wish to convert as the value of a key named "content".
-
-#### Form Encoded Example
-
-HTTP Body: 
-
-    content=Hello%2C+world%21
+```bash
+$ cat <<'EOF' | curl -F content="@-" http://localhost:1234/braille
+Hello, world!
+EOF
+```
   
 Response Body: 
 
-    ,hello1 _w6
+```
+  ,hello1 _w6
+```
 
-The response body of the request that is returned will include the Braille ASCII text suitable for embossing for the plain text sent to the service.
+The response body of the request that is returned will include the Braille
+ASCII text suitable for embossing for the plain text sent to the service.
 
 ## API Status Codes
 
 | Code | Meaning | Returned Text |
 | ---- | ------- | ------------- |
-| 200  OK | Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response. | JSON or Form-Encoded response with Braille ASCII based on sent plain texxt. |
+| 200  OK | Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response. | JSON or Form-Encoded response with Braille ASCII based on sent plain text. |
 | 400 Bad Request | The text in the content body is blank. You must include a parameter key named "content" that has a value that contains the text you wish to convert to Braille ASCII. | "You must specify content to convert to Braille." |
 | 404 Not Found | The only active endpoints are `braille` and `braille.json`. Using any other URL will result in this code. | "Not found; only POST is allowed. See documentation here: https://github.com/umd-mith/braille/tree/master/remote-liblouis" |
 | 405 Method Not Allowed | These endpoints only accept POSTs. Using any other method (i.e., GET, PUT, DELETE) will result in this code. | "Not found; only POST is allowed. See documentation here: https://github.com/umd-mith/braille/tree/master/remote-liblouis" |

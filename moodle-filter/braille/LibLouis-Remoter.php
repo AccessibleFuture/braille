@@ -23,7 +23,9 @@ function returnBrailleForString($textToTranslate, $url)
  	        array("Content-type: application/json"));
  	curl_setopt($curl, CURLOPT_POST, true);
  	curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
- 	
+ 	curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+ 	curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+
  	//get the response after executing cURL
  	$json_response = curl_exec($curl);
  	
@@ -58,7 +60,9 @@ function returnBRFFileForString($textToTranslate, $url)
  	        array("Content-type: application/json"));
  	curl_setopt($curl, CURLOPT_POST, true);
  	curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
- 	
+ 	curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+ 	curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+
  	//get the response after executing cURL
  	$json_response = curl_exec($curl);
  	

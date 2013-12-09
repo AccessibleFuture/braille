@@ -71,7 +71,7 @@ function filter_braille_convert_dots_to_unicode($dots) {
     }
   }
   $unicode = 10240 + $code;
-  return sprintf("&#%d;", $unicode) . "($code)";
+  return sprintf("&#%d;", $unicode);
 }
 
 function filter_braille_convert_dot_list_to_unicode($dot_list) {
@@ -86,7 +86,7 @@ function filter_braille_convert_dot_list_to_unicode($dot_list) {
       $ret .= filter_braille_convert_dots_to_unicode($bits[$i]);
     }
   }
-  return "<span style='font-family: SimBraille, \"Segoe UI Symbol\"'>" . $ret . "</span> ($dot_list[1])";
+  return "<span style='font-family: SimBraille, \"Segoe UI Symbol\"'>" . $ret . "</span>";
 }
 
 function filter_braille_convert_braille($content, $display_utf8) {
@@ -110,14 +110,12 @@ function filter_braille_convert_embbraille($matches) {
   return filter_braille_convert_braille($matches[1], FALSE);
 }
 
-//class filter_braille extends moodle_text_filter {
+class filter_braille extends moodle_text_filter {
   function filter($text, array $options = array()) {
     $text = preg_replace_callback('{\[SimBraille\](.*?)\[/SimBraille\]}', "filter_braille_convert_simbraille", $text);
     $text = preg_replace_callback('{\[EmbBraille\](.*?)\[/EmbBraille\]}', "filter_braille_convert_embbraille", $text);
     $text = preg_replace_callback('{\[BDots? (.*?)\]}', "filter_braille_convert_dot_list_to_unicode", $text);
     return $text;
   }
-//}
-
-  echo filter("[BDot 3456 14 356]");
+}
 ?>

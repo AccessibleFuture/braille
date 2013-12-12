@@ -99,7 +99,7 @@ function braille_settings_page() {
   update_option( "braille_display_utf8", !!$_POST["braille_display_utf8"] );
   ?>
   <div class="updated">
-      <p><strong><?php _e('settings save.', 'braille' ); ?></strong></p>
+      <p><strong><?php _e('Braille plugin settings have been saved.', 'braille' ); ?></strong></p>
     </div>
     <?php
   }
@@ -166,7 +166,7 @@ function braille_settings_page() {
         <?php echo _e( "Translate BRL to SimBraille for display" ); ?>
       </p>
       <p>
-        <?php echo _e( "Path to local xml2brl program") ?>
+        <?php echo _e( "Path to local file2brl program") ?>
         <input type="text" name="braille_local_path"
                value="<?php echo $local_path; ?>">
       </p>

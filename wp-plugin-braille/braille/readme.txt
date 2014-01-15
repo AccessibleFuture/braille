@@ -1,7 +1,7 @@
 === braille ===
 
 Contributors: corybohon, literaturegeek, jgsmith
-Stable tag: 0.0.4
+Stable tag: 0.0.5
 Tags: plugin, braille, anthologize
 Requires at least: 3.0.1
 Tested up to: 3.7.1
@@ -18,8 +18,8 @@ websites and the Anthologize WordPress plugin.
 
 = Short code =
 
-A `braille` short code is available for translating English text into Braille.
-For example:
+A `braille` short code is available for translating English text into 
+Braille. For example:
 
     [braille]Text to be translated into Braille.[/braille]
 
@@ -28,8 +28,8 @@ SimBraille in the page, or the ASCII sequences used when embossing on paper.
 
 = Page Part Translation =
 
-Primarily designed for testing, different parts of a site may automatically be
-translated into Braille.
+Primarily designed for testing, different parts of a site may automatically
+be translated into Braille.
 
 Depending on how the plugin is configured, this will place either UTF-8
 SimBraille in the page, or the ASCII sequences used when embossing on paper.
@@ -37,10 +37,10 @@ SimBraille in the page, or the ASCII sequences used when embossing on paper.
 = Integration with Anthologize =
 
 The Braille plugin provides a Braille output type for the [Anthologize
-plugin](http://anthologize.org/). You may select BRL or SimBraille output. BRL
-is suitable for embossing. SimBraille produces an HTML file with UTF-8 encoded
-glyphs representing the embossed form of the characters suitable for display
-in a visual interface.
+plugin](http://anthologize.org/). You may select BRL or SimBraille output.
+BRL is suitable for embossing. SimBraille produces an HTML file with UTF-8 
+encoded glyphs representing the embossed form of the characters suitable for 
+display in a visual interface.
 
 **N.B.: This plugin requires
 [LibLouis](https://code.google.com/p/liblouisutdml/) installed on the same
@@ -51,12 +51,14 @@ with the necessary software installed and configured.](https://github.com/umd-mi
 = Configuration =
 
 The plugin uses [LibLouis](https://code.google.com/p/liblouisutdml/) to
-translate English text into Braille. You either need LibLouis installed on the
-same machine as your WordPress installation or access to a remote LibLouis
-service such as the one provided by the [example remote LibLouis
-service](https://github.com/umd-mith/braille/tree/master/remote-liblouis).
+translate English text into Braille. You either need LibLouis installed on
+the same machine as your WordPress installation or access to a remote
+LibLouis service such as the one provided by the 
+[example remote LibLouis service](https://github.com/umd-mith/braille/tree/master/remote-liblouis).
 
-1. Go to Plugins screen and find the Braille plugin in the list OR select the Braille Plugin from the list of available Settings (see the first screenshot).
+1. Go to Plugins screen and find the Braille plugin in the list OR select
+the Braille Plugin from the list of available Settings (see the first 
+screenshot).
 
 2. Click on the plugin to go to the configuration screen.
 
@@ -79,7 +81,9 @@ translation for Anthologize, you do not need to select anything here.
 
 == Screenshots ==
 
-1. This screenshot shows how to configure the Braille plugin to make use of a
+1. This screenshot shows where to find the plugin settings page.
+
+2. This screenshot shows how to configure the Braille plugin to make use of a
 remote LibLouis translation service. The actual IP address or hostname will
 depend on where the service is hosted.
 
@@ -112,7 +116,7 @@ To install this plugin manually:
 
 2. Extract the plugin folder to your desktop.
 
-3. Read through the "readme" file to insure you follow the installation
+3. Read through the "readme" file to ensure you follow the installation
    instructions.
 
 4. Upload the plugin folder to the `wp-content/plugins` folder in your

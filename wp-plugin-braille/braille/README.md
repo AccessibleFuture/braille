@@ -18,19 +18,23 @@ The Braille plugin provides a number of Braille-related services to WordPress we
 
 ### Shortcode
 
-A `braille` shortcode is available for translating English text into Braille. For example:
+A `braille` shortcode is available for translating English text into Braille.
+For example:
 
 ```
 [braille]Text to be translated into Braille.[/braille]
 ```
 
-Depending on how the plugin is configured, this will place either UTF-8 SimBraille in the page, or the ASCII sequences used when embossing on paper.
+Depending on how the plugin is configured, this will place either UTF-8
+SimBraille in the page, or the ASCII sequences used when embossing on paper.
 
 ### Page Part Translation
 
-Primarily designed for testing, different parts of a site may automatically be translated into Braille.
+Primarily designed for testing, different parts of a site may automatically 
+be translated into Braille.
 
-Depending on how the plugin is configured, this will place either UTF-8 SimBraille in the page, or the ASCII sequences used when embossing on paper.
+Depending on how the plugin is configured, this will place either UTF-8 
+SimBraille in the page, or the ASCII sequences used when embossing on paper.
 
 ### Integration with Anthologize
 
@@ -51,7 +55,9 @@ The plugin uses [LibLouis](https://code.google.com/p/liblouisutdml/) to translat
 
 ## Screenshots
 
-1. This screenshot shows how to configure the Braille plugin to make use of a remote LibLouis translation service. The actual IP address or hostname will depend on where the service is hosted.
+1. This screenshot shows where to find the plugin settings page.
+
+2. This screenshot shows how to configure the Braille plugin to make use of a remote LibLouis translation service. The actual IP address or hostname will depend on where the service is hosted.
 
 ## Installation
 
@@ -65,7 +71,8 @@ To add this plugin using the built-in plugin installer:
 4. Select **Install Now** to install the plugin.
 5. A popup window will ask you to confirm you wish to install the plugin.
 6. Select **Proceed** to continue with the installation.
-7. If successful, click **Activate PLugin** to activate it, or **Return to Plugin Installer** for further actions.
+7. If successful, click **Activate PLugin** to activate it, or **Return to
+   Plugin Installer** for further actions.
 
 ### Manual Installation
 
@@ -73,8 +80,10 @@ To install this plugin manually:
 
 1. Download the plugin archive to your desktop.
 2. Extract the plugin folder to your desktop.
-3. Read through the "readme" file to insure you follow the installation instructions.
-4. Upload the plugin folder to the `wp-content/plugins` folder in your WordPress directory.
+3. Read through the "readme" file to ensure you follow the installation
+   instructions.
+4. Upload the plugin folder to the `wp-content/plugins` folder in your
+   WordPress directory.
 5. Go to Plugins screen and find the newly uploaded plugin in the list.
 6. Select **Activate Plugin** to activate it.
 
@@ -94,14 +103,16 @@ If you are not comfortable installing or running [the example LibLouis remote se
 
 ### 0.0.4
 * Clarify the documentation.
-* Add link to documentation about the Amazon machine image for the LibLouis translation service.
+* Add link to documentation about the Amazon machine image for the LibLouis
+  translation service.
 
 ### 0.0.3
 * Fix reference to PHP library for local LibLouis installation use.
 
 ### 0.0.2
 * Add note about LibLouis requirement to readme.
-* Use WordPress API for interacting with remote services when the API is available.
+* Use WordPress API for interacting with remote services when the API is
+  available.
 * Use better plugin detection method to detect Anthologize.
 * Sanitize plugin configuration settings.
 

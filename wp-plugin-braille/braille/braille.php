@@ -146,11 +146,11 @@ function braille_settings_page() {
     <input type="hidden" name="update_braille_settings" value="Y">
       <p>
         <input type="checkbox" name="braille_use_remote" id="braille-use-remote" <?php checked( $use_remote ); ?> />
-		<label for="braille-use-remote"><?php esc_html_e( 'Use remote LibLouis service', 'braille' ); ?></label>
+        <label for="braille-use-remote"><?php esc_html_e( 'Use remote LibLouis service', 'braille' ); ?></label>
       </p>
       <p>
         <input type="checkbox" name="braille_filter_content" id="braille-filter-content" <?php checked( $filter_content ); ?> />
-		<label for="braille-filter-content"><?php esc_html_e( 'Translate page and post content', 'braille' ); ?></label>
+        <label for="braille-filter-content"><?php esc_html_e( 'Translate page and post content', 'braille' ); ?></label>
       </p>
       <p>
         <input type="checkbox" name="braille_filter_comment" id="braille-filter-comment" <?php checked( $filter_comment ); ?> />
@@ -185,7 +185,7 @@ function braille_settings_page() {
         <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'braille' ); ?>" />
       </p>
 
-	  <?php wp_nonce_field( 'braille_save_settings' ); ?>
+      <?php wp_nonce_field( 'braille_save_settings' ); ?>
     <form>
   </div>
 <?php

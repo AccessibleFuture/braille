@@ -46,6 +46,7 @@ function braille_css() {
 
 // Add a menu item for the plugin and test for authority
 add_action( 'admin_menu', 'braille_admin_menu' );
+add_action( 'admin_init', 'braille_save_settings' );
 add_filter( 'the_content', 'braille_content' );
 add_filter( 'the_title', 'braille_title' );
 add_filter( 'the_excerpt', 'braille_content' );
@@ -77,31 +78,51 @@ function braille_admin_menu() {
   );
 }
 
+/**
+ * Processes saved settings.
+ *
+ * @since 0.0.4
+ */
+function braille_save_settings() {
+  if ( ! current_user_can( 'manage_options' ) ) {
+    return;
+  }
+
+  if ( empty( $_POST['update_braille_settings'] ) || 'Y' !== $_POST['update_braille_settings'] ) {
+    return;
+  }
+
+  check_admin_referer( 'braille_save_settings' );
+
+  update_option( 'braille_use_remote', ! empty( $_POST['braille_use_remote'] ) );
+  update_option( 'braille_filter_content', ! empty( $_POST['braille_filter_content'] ) );
+  update_option( 'braille_filter_title', ! empty( $_POST['braille_filter_title'] ) );
+  update_option( 'braille_filter_wp_title', ! empty( $_POST['braille_filter_wp_title'] ) );
+  update_option( 'braille_filter_comment', ! empty( $_POST['braille_filter_comment'] ) );
+  update_option( 'braille_filter_widget_title', ! empty( $_POST['braille_filter_widget_title'] ) );
+  update_option( 'braille_display_utf8', ! empty( $_POST['braille_display_utf8'] ) );
+
+  $new_local_path = isset( $_POST['braille_local_path'] ) ? sanitize_file_name( wp_unslash( $_POST['braille_local_path'] ) ) : '';
+  update_option( 'braille_local_path', $new_local_path );
+
+  $new_remote_url = isset( $_POST['braille_remote_url'] ) ? sanitize_text_field( wp_unslash( $_POST['braille_remote_url'] ) ) : '';
+  update_option( 'braille_remote_url', $new_remote_url );
+
+  $redirect_to = add_query_arg(
+    array(
+      'page'    => 'edu-umd-mith-braille',
+      'updated' => 1,
+    ),
+    admin_url( 'options-general.php' )
+  );
+  wp_safe_redirect( $redirect_to );
+}
+
 function braille_settings_page() {
   if ( !current_user_can( 'manage_options' ) )  {
     wp_die(
       __( 'You do not have sufficient permissions to access this page.' )
     );
-  }
-
-  if( isset( $_POST["update_braille_settings"] ) 
-   && $_POST["update_braille_settings"] == 'Y' ) {
-  update_option( "braille_use_remote", !!$_POST["braille_use_remote"] );
-  update_option( "braille_local_path", sanitize_file_name($_POST["braille_local_path"]) );
-  update_option( "braille_remote_url", sanitize_text_field($_POST["braille_remote_url"]) );
-  update_option( "braille_filter_content", !!$_POST["braille_filter_content"] );
-  update_option( "braille_filter_title", !!$_POST["braille_filter_title"] );
-  update_option( "braille_filter_wp_title", !!$_POST["braille_filter_wp_title"] );
-  update_option( "braille_filter_comment", !!$_POST["braille_filter_comment"] );
-  update_option( "braille_filter_widget_title", !!$_POST["braille_filter_widget_title"] );
-  
-  
-  update_option( "braille_display_utf8", !!$_POST["braille_display_utf8"] );
-  ?>
-  <div class="updated">
-      <p><strong><?php _e('Braille plugin settings have been saved.', 'braille' ); ?></strong></p>
-    </div>
-    <?php
   }
 
   // Read in current option settings
@@ -124,62 +145,47 @@ function braille_settings_page() {
     <form method="POST" action="">
     <input type="hidden" name="update_braille_settings" value="Y">
       <p>
-        <input type="checkbox" name="braille_use_remote"<?php
-           echo $use_remote ? " checked" : "";
-        ?>>
-        <?php echo _e( "Use remote LibLouis service" ); ?>
+        <input type="checkbox" name="braille_use_remote" id="braille-use-remote" <?php checked( $use_remote ); ?> />
+        <label for="braille-use-remote"><?php esc_html_e( 'Use remote LibLouis service', 'braille' ); ?></label>
       </p>
       <p>
-        <input type="checkbox" name="braille_filter_content"<?php
-           echo $filter_content ? " checked" : "";
-        ?>>
-        <?php echo _e( "Translate page and post content" ); ?>
+        <input type="checkbox" name="braille_filter_content" id="braille-filter-content" <?php checked( $filter_content ); ?> />
+        <label for="braille-filter-content"><?php esc_html_e( 'Translate page and post content', 'braille' ); ?></label>
       </p>
       <p>
-        <input type="checkbox" name="braille_filter_comment"<?php
-           echo $filter_comment ? " checked" : "";
-        ?>>
-        <?php echo _e( "Translate comment content" ); ?>
+        <input type="checkbox" name="braille_filter_comment" id="braille-filter-comment" <?php checked( $filter_comment ); ?> />
+        <label for="braille-filter-comment"><?php esc_html_e( 'Translate comment content', 'braille' ); ?></label>
       </p>
       <p>
-        <input type="checkbox" name="braille_filter_title"<?php
-           echo $filter_title ? " checked" : "";
-        ?>>
-        <?php echo _e( "Translate page and post titles" ); ?>
+        <input type="checkbox" name="braille_filter_title" id="braille-filter-title" <?php checked( $filter_title ); ?> />
+        <label for="braille-filter-title"><?php esc_html_e( 'Translate page and post titles', 'braille' ); ?></label>
       </p>
       <p>
-        <input type="checkbox" name="braille_filter_wp_title"<?php
-           echo $filter_wp_title ? " checked" : "";
-        ?>>
-        <?php echo _e( "Translate the browser tab title (HTML title element)" ); ?>
+        <input type="checkbox" name="braille_filter_wp_title" id="braille-filter-wp-title" <?php checked( $filter_wp_title ); ?> />
+        <label for="braille-filter-wp-title"><?php esc_html_e( 'Translate the browser tab title (HTML title element)', 'braille' ); ?></label>
       </p>
       <p>
-        <input type="checkbox" name="braille_filter_widget_title"<?php
-           echo $filter_widget_title ? " checked" : "";
-        ?>>
-        <?php echo _e( "Translate widget titles" ); ?>
+        <input type="checkbox" name="braille_filter_widget_title" id="braille-filter-widget-title" <?php checked( $filter_widget_title ); ?> />
+        <label for="braille-filter-widget-title"><?php esc_html_e( 'Translate widget titles', 'braille' ); ?></label>
       </p>
       <p>
-        <input type="checkbox" name="braille_display_utf8"<?php
-           echo $display_utf8 ? " checked" : "";
-        ?>>
-        <?php echo _e( "Translate BRL to SimBraille for display" ); ?>
+        <input type="checkbox" name="braille_display_utf8" id="braille-display-utf8" <?php checked( $display_utf8 ); ?> />
+        <label for="braille-display-utf8"><?php esc_html_e( 'Translate BRL to SimBraille for display', 'braille' ); ?></label>
       </p>
       <p>
-        <?php echo _e( "Path to local file2brl program") ?>
-        <input type="text" name="braille_local_path"
-               value="<?php echo $local_path; ?>">
+        <label for="braille-local-path"><?php esc_html_e( 'Path to local file2brl program', 'braille' ); ?></label>
+        <input type="text" name="braille_local_path" id="braille-local-path" value="<?php echo esc_attr( $local_path ); ?>" />
       </p>
       <p>
-        <?php echo _e( "URL for remote LibLouis service")?>
-        <input type="text" name="braille_remote_url"
-               value="<?php echo $remote_url; ?>">
+        <label for="braille-remote-url"><?php esc_html_e( 'URL for remote LibLouis service', 'braille' ); ?></label>
+        <input type="text" name="braille_remote_url" id="braille-remote-url" value="<?php echo esc_attr( $remote_url ); ?>" />
       </p>
       <hr />
       <p class="submit">
-        <input type="submit" name="Submit" class="button-primary"
-               value="<?php esc_attr_e('Save Changes') ?>"/>
+        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'braille' ); ?>" />
       </p>
+
+      <?php wp_nonce_field( 'braille_save_settings' ); ?>
     <form>
   </div>
 <?php

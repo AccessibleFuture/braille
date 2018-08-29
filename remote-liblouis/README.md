@@ -1,153 +1,73 @@
-# Remote-LibLouis v.1.0
+# Remote LibLouis Translation Service
 
-Remote-LibLouis is a Ruby + Sinatra HTTP service that lets you interact with LibLouisXML remotely as a REST service.
-
-## About the Library 
-
-### System Requirements
-
-System with Ruby and Ruby Gems Installed. 
-
-#### Installing LibLouis
-
-Your system must have LibLouis installed (specifically the version that contains `file2brl`). On Ubuntu run the following from the command line to install LibLouis:
-
-    sudo apt-get install liblouisutdml-bin
-
-#### Installing Remote-LibLouis
-
-    bundle install
-    
-#### Required Gems
-
-1. sinatra
-2. json
-3. tempfile
-4. unicorn
-
-#### Running Remote-LibLouis 
-
-    cd location_of_remote-liblouis_directory
-
-    unicorn -p 1234
-
-Replace "1234" with the port number that you wish to use for the REST service.
-
-#### Configuring the WordPress Braille Plugin
-
-When using this service as the remote LibLouis service for the Braille WordPress plugin, use the `braille.json` endpoint.
+The remote translation service provides a simple API. The [Ruby
+version](./ruby) is an example implementation of this API. Implementations in
+other languages will be placed here as they are developed and made available.
+The [Amazon machine image](../USING-REMOTE-LIBLOUIS-AMI.md) uses the Ruby
+implementation.
 
 ## API
 
 ### JSON-Encoded Data
 
-    POST http://localhost:1234/braille.json
-  
-When posting to the `braille.json` endpoint, use POST, and include the text that you wish to convert as the value of the key named "content". 
+HTTP Request:
 
-#### JSON-Encoded Example
+```
+POST http://localhost:1234/braille.json
+```
 
-HTTP Body: 
+```bash
+$ cat <<'EOJ' | curl --data-ascii "@-" -H "Content-Type: application/json" http://localhost:1234/braille.json
+{
+  "content": "Hello, world!"
+}
+EOJ
+```
 
-    {
-        "content": "Hello, world!"
-    }
-  
-Response Body: 
+Response: 
 
-    {
-        "content": "  ,hello1 _w6\r\n"
-    }
+```json
+{
+    "content": "  ,hello1 _w6\r\n"
+}
+```
 
-The response body of the request that is returned will include the braille ascii text for the plain text sent to the service in the "content" key value.
+The response body of the request that is returned will include the Braille
+ASCII text for the plain text sent to the service in the "content" key value.
 
 ### Form-Encoded Data
 
-    POST http://localhost:1234/braille
+When posting to the `braille` endpoint (without the `.json` extension), use
+POST, and include the text that you wish to convert as the value of a key
+named "content".
 
-When posting to the `braille` endpoint (without the `.json` extension), use POST, and include the text that you wish to convert as the value of a key named "content".
+HTTP Request:
 
-#### Form Encoded Example
-HTTP Body: 
+```
+POST http://localhost:1234/braille
+```
 
-    content=Hello%2C+world%21
+```bash
+$ cat <<'EOF' | curl -F content="@-" http://localhost:1234/braille
+Hello, world!
+EOF
+```
   
 Response Body: 
 
-    ,hello1 _w6
+```
+  ,hello1 _w6
+```
 
-The response body of the request that is returned will include the braille ascii text suitable for embossing for the plain text sent to the service.
+The response body of the request that is returned will include the Braille
+ASCII text suitable for embossing for the plain text sent to the service.
 
 ## API Status Codes
-<table>
-<tr>
-<td>
-  Code
-</td>
-<td>
-  Meaning
-</td>
-<td>
-  Returned Text
-</td>
-</tr>
-<tr>
-<td>
-  200
-</td>
-<td>
-  Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response.
-</td>
-<td>
-  JSON or Form-Encoded response with braille ASCII based on sent plain text.
-</td>
-</tr>
 
-<tr>
-<td>
-  404
-</td>
-<td>
-  The only active endpoint is `braille` and `braile.json`. It only accepts POST. You will get this error code if you try to GET or POST to any other endpoint.
-</td>
-<td>
-  "Not found; only POST is allowed. See documentation here: https://github.com/umd-mith/braille/tree/master/remote-liblouis"
-</td>
-</tr>
-<tr>
-<td>
-  501
-</td>
-<td>
-  The text in the content body is blank. You must include a parameter key named "content" that has a value that contains the text you wish to convert to braille ascii.
-</td>
-<td>
-  "You must specify content to convert to braille."
-</td>
-</tr>
-<tr>
-<td>
-  502
-</td>
-<td>
-  An error occured while translating your text -- the ouput from xml2brl contained no text. If problem persists, ensure that xml2brl is functioning properly on your system.
-</td>
-<td>
-  "Content not successfuly converted to braille." 
-</td>
-</tr>
-</table>
-
-## Changelog
-
-**Version 1.0**
-
-- Inclusion of a JSON endpoint for the service; additional tweaks to the documentation and code documentation.
-
-**Version 0.9**
-
-- Initial version of the service available for beta testing
-
-## License
-
-Remote-LibLouis is released under the [MIT Open Source License](http://opensource.org/licenses/MIT).
+| Code | Meaning | Returned Text |
+| ---- | ------- | ------------- |
+| 200  OK | Everything worked properly, the conversion was successful, and the Braille ASCII has been sent back in the response. | JSON or Form-Encoded response with Braille ASCII based on sent plain text. |
+| 400 Bad Request | The text in the content body is blank. You must include a parameter key named "content" that has a value that contains the text you wish to convert to Braille ASCII. | "You must specify content to convert to Braille." |
+| 404 Not Found | The only active endpoints are `braille` and `braille.json`. Using any other URL will result in this code. | "Not found; only POST is allowed. See documentation here: https://github.com/umd-mith/braille/tree/master/remote-liblouis" |
+| 405 Method Not Allowed | These endpoints only accept POSTs. Using any other method (i.e., GET, PUT, DELETE) will result in this code. | "Not found; only POST is allowed. See documentation here: https://github.com/umd-mith/braille/tree/master/remote-liblouis" |
+| 502 Bad Gateway | An error occured while translating your text&mdash;the output from file2brl contained no text. If the problem persists, ensure that file2brl is functioning properly on your system. | "Content not successfully converted to Braille." |

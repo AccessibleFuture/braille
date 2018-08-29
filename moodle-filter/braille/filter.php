@@ -1,15 +1,5 @@
 <?php
 /**
- * Moodle - Filter for converting TeX expressions to cached gif images
- *
- * This Moodle text filter converts TeX expressions delimited
- * by either $$...$$ or by <tex...>...</tex> tags to gif images using
- * mimetex.cgi obtained from http: *www.forkosh.com/mimetex.html authored by
- * John Forkosh john@forkosh.com.  Several binaries of this areincluded with
- * this distribution.
- * Note that there may be patent restrictions on the production of gif images
- * in Canada and some parts of Western Europe and Japan until July 2004.
- *
  * @package    filter
  * @subpackage braille
  * @copyright  2013 University of Maryland
@@ -63,6 +53,42 @@ function ascii_to_unicode($text) {
   return $out;
 }
 
+function filter_braille_convert_dots_to_unicode($dots) {
+  $codes = array(
+    '1' => 1,
+    '2' => 2,
+    '3' => 4,
+    '4' => 8,
+    '5' => 16,
+    '6' => 32,
+  );
+  $n = strlen($dots);
+  $code = 0;
+  for($i = 0; $i < $n; $i++) {
+    $ch = $dots[$i];
+    if(array_key_exists($ch, $codes)) {
+      $code += $codes[$ch];
+    }
+  }
+  $unicode = 10240 + $code;
+  return sprintf("&#%d;", $unicode);
+}
+
+function filter_braille_convert_dot_list_to_unicode($dot_list) {
+  $bits = explode(" ", $dot_list[1]);
+  $n = sizeof($bits);
+  $ret = "";
+  for($i = 0; $i < $n; $i++) {
+    if($bits[$i] == "_") {
+      $ret .= "&#10240;";
+    }
+    else {
+      $ret .= filter_braille_convert_dots_to_unicode($bits[$i]);
+    }
+  }
+  return "<span style='font-family: SimBraille, \"Segoe UI Symbol\"'>" . $ret . "</span>";
+}
+
 function filter_braille_convert_braille($content, $display_utf8) {
   global $CFG;
 
@@ -73,21 +99,22 @@ function filter_braille_convert_braille($content, $display_utf8) {
   else {
     $bcontent = htmlspecialchars($acontent);
   }
-  return $bcontent;
+  return "<span style='font-family: SimBraille, \"Segoe UI Symbol\"'>" . $bcontent . "</span>";
 }
 
 function filter_braille_convert_simbraille($matches) {
-  return filter_braille_convert_braille($matches[0], TRUE);
+  return filter_braille_convert_braille($matches[1], TRUE);
 }
 
 function filter_braille_convert_embbraille($matches) {
-  return filter_braille_convert_braille($matches[0], FALSE);
+  return filter_braille_convert_braille($matches[1], FALSE);
 }
 
 class filter_braille extends moodle_text_filter {
   function filter($text, array $options = array()) {
     $text = preg_replace_callback('{\[SimBraille\](.*?)\[/SimBraille\]}', "filter_braille_convert_simbraille", $text);
     $text = preg_replace_callback('{\[EmbBraille\](.*?)\[/EmbBraille\]}', "filter_braille_convert_embbraille", $text);
+    $text = preg_replace_callback('{\[BDots? (.*?)\]}', "filter_braille_convert_dot_list_to_unicode", $text);
     return $text;
   }
 }
